@@ -7,4 +7,14 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.addDay = function(startH, startM) {
 		return Agenda.addDay(startH, startM);
 	};
+	
+	$scope.createActivityButton = "Add Activity";
+	
+	$scope.createActivity = function(hours, minutes, name, type) {
+		return Agenda.createActivity(hours, minutes, name, type);
+	}
+	
+	$scope.parkedActivities = function() {
+		return Agenda.parkedActivities;
+	}
 });

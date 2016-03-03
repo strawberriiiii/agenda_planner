@@ -1,5 +1,5 @@
-angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService'])
-.factory('Agenda', function(Day) {
+angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agendaPlanner.ActivityService'])
+.factory('Agenda', function(Day, Activity) {
 	
 	var o = {
 		days: [],
@@ -18,6 +18,12 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService'])
 		o.days.push(day);
 		return day;
 	};
+	
+	//Create the activity
+	o.createActivity = function(hours, minutes, name, type) {
+		var activity = new Activity(hours, minutes, name, type);
+		o.addParkedActivity(activity, null);
+	}
 	
 	// add an activity to model
 	o.addActivity = function (activity, day, position) {
