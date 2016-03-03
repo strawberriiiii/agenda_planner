@@ -32,4 +32,16 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	};
 	
 	$scope.update();
+
+	//Add Activity
+	$scope.createActivityButton = "Add Activity";
+	
+	$scope.createActivity = function(hours, minutes, name, type) {
+		return Agenda.createActivity(hours, minutes, name, type);
+	};
+	
+	$scope.parkedActivities = function() {
+		return Agenda.parkedActivities;
+	};
+
 });

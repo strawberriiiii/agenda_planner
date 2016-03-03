@@ -1,0 +1,16 @@
+<div class="container" ng-controller="AgendaCtrl as ctrl">
+	<div class="col-md-3" id="sidebar">
+		<!--This will be modified later to create a modal instead of directly inputting info-->
+		<button type="button" class="btn btn-success" ng-click="createActivity(hours, minutes, name, type)">
+			{{createActivityButton}}
+		</button>
+		<!--Uses list group bootstrap style-->
+		<ul class="list-group" ng-repeat="p in parkedActivities">
+			<li class="list-group-item">
+				<span>{{p.getTypeId()}}</span>
+				<span>{{p.getName()}}</span>
+				<span class="badge">{{p.getLength()}}</span>
+			</li>
+		</ul>
+	</div>
+</div>

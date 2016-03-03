@@ -1,6 +1,6 @@
 angular.module('agendaPlanner.DayService', [])
 .factory('Day', function() {
-	// This is a day consturctor. You can use it to create days, 
+	// This is a day constructor. You can use it to create days, 
 	// but there is also a specific function in the Model that adds
 	// days to the model, so you don't need call this yourself.
 	function Day(startH,startM) {
@@ -16,7 +16,7 @@ angular.module('agendaPlanner.DayService', [])
 			this._start = startH * 60 + startM;
 		},
 		
-		// returns the total length of the acitivities in 
+		// returns the total length of the activities in 
 		// a day in minutes
 		getTotalLength: function () {
 			var totalLength = 0;
