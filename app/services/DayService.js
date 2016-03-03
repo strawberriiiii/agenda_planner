@@ -30,13 +30,41 @@ angular.module('agendaPlanner.DayService', [])
 		// the end time of the day
 		getEnd: function() {
 			var end = this._start + this.getTotalLength();
-			return Math.floor(end/60) + ":" + end % 60;
+			var endString = "";
+			
+			if (Math.floor(end/60) < 10) {
+				endString += 0;
+			} 
+			
+			endString += Math.floor(end/60) + ":";
+			
+			if (end % 60 < 10) {
+				endString += 0;
+			}
+			
+			endString += end % 60;
+			
+			return endString;
 		},
 			
 		// returns the string representation Hours:Minutes of 
 		// the start time of the day
 		getStart: function() {
-			return Math.floor(this._start/60) + ":" + this._start % 60;
+			var start = "";
+			
+			if (Math.floor(this._start/60) < 10) {
+				start += 0;
+			} 
+			
+			start += Math.floor(this._start/60) + ":";
+			
+			if (this._start % 60 < 10) {
+				start += 0;
+			}
+			
+			start += this._start % 60;
+			
+			return start; 
 		},
 			
 		// returns the length (in minutes) of activities of certain type
