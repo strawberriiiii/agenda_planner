@@ -12,6 +12,9 @@
 					</td>
 					<td>
 						<p>{{day.getStart()}}</p>
+					</td>
+					<td>
+						<button ng-click="removeDay($index)"><span class="glyphicon glyphicon-trash" area-hidden="true"></span></button>
 					</td>	
 				</tr>
 				<tr>
@@ -20,6 +23,12 @@
 					</td>
 					<td>
 						<p>{{day.getEnd()}}</p>
+					</td>
+					<td>
+						<div class="chart-container">
+							<canvas id="myCanvas" ng-init="getData($index)"></canvas>
+							<canvas id="pie"  class="chart chart-pie" chart-data="[500, 300, 100]" chart-labels="labels"></canvas>
+						</div>
 					</td>
 				</tr>
 				<tr>

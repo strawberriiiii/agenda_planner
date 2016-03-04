@@ -19,11 +19,16 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		return day;
 	};
 	
+	// remove a specific day to avoid an overload of days in the agenda
+	o.removeDay = function(index) {
+		o.days.splice(index, 1);
+	};
+	
 	//Create the activity
 	o.createActivity = function(hours, minutes, name, type) {
 		var activity = new Activity(hours, minutes, name, type);
 		o.addParkedActivity(activity, null);
-	}
+	};
 	
 	// add an activity to model
 	o.addActivity = function (activity, day, position) {
