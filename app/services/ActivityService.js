@@ -2,7 +2,7 @@
 //or elsewhere; since color is a more visual thing, I think it's better to handle it
 //elsewhere, but it's something to keep in mind
 angular.module('agendaPlanner.ActivityService', [])
-.factory('Day', function() {
+.factory('Activity', function() {
 	
 	//Activity constructor
 	//Currently I'm working under the assumption that the user can input
@@ -31,7 +31,7 @@ angular.module('agendaPlanner.ActivityService', [])
 		//Retrieve info about the length of an activity (in string format)
 		//May not need this function
 		getStringLength: function() {
-			return Math.floor(this._length / 60 + "hours and " + this._length % 60 + " minutes";
+			return Math.floor(this._length / 60 + "hours and " + this._length % 60 + " minutes");
 		},
 		
 		//Modify the type of activity
