@@ -36,12 +36,18 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	//Add Activity
 	$scope.createActivityButton = "Add Activity";
 	
-	$scope.createActivity = function(hours, minutes, name, type) {
-		return Agenda.createActivity(hours, minutes, name, type);
+	$scope.createActivity = function(minutes, name, type, description) {
+		return Agenda.createActivity(minutes, name, type, description);
 	};
 	
 	$scope.parkedActivities = function() {
 		return Agenda.parkedActivities;
 	};
+	
+	//Available activity times
+	$scope.availableTimes = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180];
+	
+	//Types of activities (might not want to have this here?)
+	$scope.types = ["Presentation", "Discussion", "Group work", "Break"];
 
 });

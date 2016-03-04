@@ -7,10 +7,11 @@ angular.module('agendaPlanner.ActivityService', [])
 	//Activity constructor
 	//Currently I'm working under the assumption that the user can input
 	//hours and minutes when creating the activity, but this is easily changed
-	function Activity(hours, minutes, name, type) {
-		this._length = hours * 60 + minutes;
+	function Activity(minutes, name, type, description) {
+		this._length = minutes;
 		this._name = name;
 		this._type = type;
+		this._description = description;
 	}
 	
 	Activity.prototype = {
@@ -18,8 +19,8 @@ angular.module('agendaPlanner.ActivityService', [])
 		constructor: Activity,
 		
 		//Modify the length of an activity
-		setLength: function(newHours, newMinutes) {
-			this._length = newHours * 60 + newMinutes;
+		setLength: function(newMinutes) {
+			this._length = newMinutes;
 		},
 		
 		//Retrieve info about length of an activity
@@ -51,6 +52,16 @@ angular.module('agendaPlanner.ActivityService', [])
 		//Retrieves the name of the activity
 		getName: function() {
 			return this._name;
+		},
+		
+		//Edits description of activity
+		setDescription: function(newDescription) {
+			this._description = newDescription;
+		},
+		
+		//Retrieves the description of the activity
+		getDescription: function() {
+			return this._description;
 		}
 		
 	};
