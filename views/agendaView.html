@@ -13,8 +13,9 @@
 					<td>
 						<p>{{day.getStart()}}</p>
 					</td>
-					<td>
-						<button ng-click="removeDay($index)"><span class="glyphicon glyphicon-trash" area-hidden="true"></span></button>
+					<td rowspan="3">
+						<!--<button ng-click="removeDay($index)"><span class="glyphicon glyphicon-trash" area-hidden="true"></span></button>-->
+						<canvas id="myCanvas" width="75" height="110" ng-init="drawGraphic($index)"></canvas>
 					</td>	
 				</tr>
 				<tr>
@@ -24,12 +25,7 @@
 					<td>
 						<p>{{day.getEnd()}}</p>
 					</td>
-					<td>
-						<div class="chart-container">
-							<canvas id="myCanvas" ng-init="getData($index)"></canvas>
-							<canvas id="pie"  class="chart chart-pie" chart-data="[500, 300, 100]" chart-labels="labels"></canvas>
-						</div>
-					</td>
+					
 				</tr>
 				<tr>
 					<td>

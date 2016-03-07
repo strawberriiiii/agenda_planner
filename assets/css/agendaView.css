@@ -23,6 +23,7 @@
 .alert.header {
 	margin: 0px;
 	background: #ffccb3;
+	padding-right: 0px;
 }
 
 #dayButtonHeader {
@@ -37,4 +38,12 @@
 .timepicker {
 	margin-left: 25%;
 	margin-right: 29%;
+}
+
+#myCanvas {
+	margin: 0px;
+}
+
+table {
+	margin-right: 0px;
 }

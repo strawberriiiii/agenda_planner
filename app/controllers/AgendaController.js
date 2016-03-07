@@ -19,33 +19,57 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		return Agenda.removeDay(indexDay);
 	};
 	
-	$scope.getData = function(indexDay) {
-		var canvas = document.getElementById('myCanvas');
-	      var context = canvas.getContext('2d');
-	
-	      // do cool things with the context
-	      context.font = '40pt Calibri';
-	      context.fillStyle = 'blue';
-	      context.fillText('Hello World!', 150, 100);
-	      console.log("here");
-      
-		var whole = 120;//$scope.days[indexDay].getTotalLength();
-		var partPres = 10;//$scope.days[indexDay].getLengthByType("Presentation");
-		var partDis = 50;//$scope.days[indexDay].getLengthByType("Discussion");
-		var partGroup = 20;//$scope.days[indexDay].getLengthByType("Group work");
-		var partBreak = 10;//$scope.days[indexDay].getLengthByType("Break");
+	$scope.drawGraphic = function(indexDay) {
+		      
+		var whole = $scope.days[indexDay].getTotalLength();	
+		var canvas = document.getElementById('myCanvas').getContext("2d");
 		
-		var perPartPres = round(partPres / whole, 2);
-		var perPartDis = round(partDis / whole, 2);
-		var perPartGroup = round(partGroup / whole, 2);
-		var perPartBreak = round(partBreak /whole, 2);
+		//Presentation block
+		var partPres = $scope.days[indexDay].getLengthByType("Presentation");
+		var perPartPres = round(partPres / whole, 2) * 100;
 		
-		var data = [
-			100, 200, 300
-		];
+		canvas.beginPath();
+		canvas.fillStyle= "blue";
+		canvas.rect(10, 1, 50, perPartPres);
+		canvas.fill();
 		
-		console.log(whole, partPres, partDis, partGroup, partBreak, perPartPres, perPartGroup, perPartBreak);
-		return data;		
+		//Disscussion block
+		var partDis = $scope.days[indexDay].getLengthByType("Discussion");
+		var perPartDis = round(partDis / whole, 2) * 100;
+
+		canvas.beginPath();
+		canvas.fillStyle= "green";
+		canvas.rect(10, perPartPres, 50, perPartDis);
+		canvas.fill();
+		
+		//Group work block
+		var partGroup = $scope.days[indexDay].getLengthByType("Group work");
+		var perPartGroup = round(partGroup / whole, 2) * 100;
+		
+		canvas.beginPath();
+		canvas.fillStyle= "#ff6666";
+		canvas.rect(10, perPartPres + perPartDis, 50, perPartGroup);
+		canvas.fill();
+				
+		//Break block
+		var partBreak = $scope.days[indexDay].getLengthByType("Break");
+		var perPartBreak = round(partBreak / whole, 2) * 100;
+		
+		canvas.beginPath();
+		canvas.fillStyle= "yellow";
+		canvas.rect(10, perPartPres + perPartDis + perPartGroup, 50, perPartBreak);
+		canvas.fill();
+		
+		//Minimum break line 
+		if (whole > 0) {
+			canvas.beginPath();
+			canvas.strokeStyle = "red";
+			canvas.moveTo(1, 70);
+			canvas.lineTo(70, 70);
+			canvas.stroke();
+		}
+				
+		console.log(whole, perPartPres, perPartDis, perPartGroup, perPartBreak);		
 	};
 	
 	function round(value, decimals) {
