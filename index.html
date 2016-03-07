@@ -47,11 +47,15 @@
 		<nav ng-include="'views/header.html'"></nav>
 		
 		<!-- Body -->
-		<div ng-view id="content"></div>
+		<section>
+			<div ng-view></div>
+		</section>
 
 		<!-- Footer -->
 		<footer class="footer">
-			{{footerText}}
+			<div class="container">
+				<p>{{footerText}}</p>
+			</div>
 		</footer>
 	</body>
 </html>
