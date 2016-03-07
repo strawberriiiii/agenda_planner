@@ -9,6 +9,10 @@
     min-height: 800px;
 }
 
+#sidebar button {
+    margin-bottom: 10px;
+}
+
 .activityPreview {
     border: 1px solid black;
     background-color: white;
