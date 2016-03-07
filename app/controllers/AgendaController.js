@@ -29,7 +29,8 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		var perPartPres = round(partPres / whole, 2) * 100;
 		
 		canvas.beginPath();
-		canvas.fillStyle= "blue";
+		canvas.fillStyle = "#337ab7";
+		canvas.strokeStyle = "#2e6da4";
 		canvas.rect(10, 1, 50, perPartPres);
 		canvas.fill();
 		
@@ -38,7 +39,8 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		var perPartDis = round(partDis / whole, 2) * 100;
 
 		canvas.beginPath();
-		canvas.fillStyle= "green";
+		canvas.fillStyle = "#5cb85c";
+		canvas.strokeStyle = "#4cae4c";
 		canvas.rect(10, perPartPres, 50, perPartDis);
 		canvas.fill();
 		
@@ -47,7 +49,8 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		var perPartGroup = round(partGroup / whole, 2) * 100;
 		
 		canvas.beginPath();
-		canvas.fillStyle= "#ff6666";
+		canvas.fillStyle = "#d9534f";
+		canvas.strokeStyle = "#d43f3a";
 		canvas.rect(10, perPartPres + perPartDis, 50, perPartGroup);
 		canvas.fill();
 				
@@ -56,7 +59,8 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		var perPartBreak = round(partBreak / whole, 2) * 100;
 		
 		canvas.beginPath();
-		canvas.fillStyle= "yellow";
+		canvas.fillStyle = "#f0ad4e";
+		canvas.strokeStyle = "#eea236";
 		canvas.rect(10, perPartPres + perPartDis + perPartGroup, 50, perPartBreak);
 		canvas.fill();
 		
