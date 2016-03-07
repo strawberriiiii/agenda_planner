@@ -10,10 +10,16 @@
 				<tr>
 					<td>{{p.getTypeId()}}</td>
 					<td>{{p.getName()}}</td>
-					<td>{{p.getLength()}}</span>
+					<td>{{p.getLength()}}</td>
 				<tr>
 			</tbody>
 		</table>
+	</div>
+
+	<div id="createActivity" class="modal fade" role="dialog" ng-controller="ActivityCtrl as ctrl">
+		<div class="modal-dialog modal-md" ng-include="'views/createActivityView.html'">
+
+		</div>
 	</div>
 	
 </div>

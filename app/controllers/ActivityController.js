@@ -1,5 +1,5 @@
 angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService'])
-.controller('ActivityCtrl', function($scope, Agenda) {
+.controller('ActivityCtrl', function($scope, $location, Agenda) {
 	
 	//Creates an activity and adds it to the model
 	$scope.createActivity = function(minutes, name, type, description) {
