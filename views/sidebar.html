@@ -1,16 +1,16 @@
-<div class="container" ng-controller="ActivityCtrl as ctrl">
+<div ng-controller="ActivityCtrl as ctrl">
 
-	<div class="col-md-3" id="sidebar">
+	<div class="col-md-3 text-center" id="sidebar">
 		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createActivity">
 			{{createActivityButton}}
 		</button>
 		<!--Uses regular HTML table-->
 		<table style="width: 100%">
-			<tbody ng-repeat="p in parkedActivities">
-				<tr>
+			<tbody ng-repeat="p in parkedActivities()">
+				<tr class="activityPreview" draggable="true">
 					<td>{{p.getTypeId()}}</td>
 					<td>{{p.getName()}}</td>
-					<td>{{p.getLength()}}</td>
+					<td>{{p.getLength()}} min</td>
 				<tr>
 			</tbody>
 		</table>

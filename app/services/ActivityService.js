@@ -25,7 +25,7 @@ angular.module('agendaPlanner.ActivityService', [])
 		
 		//Retrieve info about the length of an activity (in string format)
 		getStringLength: function() {
-			return Math.floor(this._length / 60 + "hours and " + this._length % 60 + " minutes");
+			return String(Math.floor(this._length / 60 + "hours and " + this._length % 60 + " minutes"));
 		},
 		
 		//Modify the type of activity
