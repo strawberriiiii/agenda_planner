@@ -1,3 +1,19 @@
 #activityType {
     display: block;
 }
+
+#activityType .btn-primary:focus {
+    border: 2px solid #00004d;
+}
+
+#activityType .btn-success:focus {
+    border: 2px solid #003300;
+}
+
+#activityType .btn-danger:focus {
+    border: 2px solid #660000;
+}
+
+#activityType .btn-warning:focus {
+    border: 2px solid #808000;
+}

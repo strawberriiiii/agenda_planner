@@ -7,7 +7,7 @@
 		<!--Uses regular HTML table-->
 		<table style="width: 100%">
 			<tbody ng-repeat="p in parkedActivities()">
-				<tr class="activityPreview" draggable="true">
+				<tr class="activityPreview" draggable="true" id="{{p.getTypeId()}}">
 					<td>{{p.getTypeId()}}</td>
 					<td>{{p.getName()}}</td>
 					<td>{{p.getLength()}} min</td>
