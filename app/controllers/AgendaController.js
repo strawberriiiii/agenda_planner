@@ -7,6 +7,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.endSlot = "End Time: ",
 	$scope.totalLengthSlot = "Total Length: ";
 	$scope.minute = "min";
+	$scope.deleteDay = "Delete Day";
 	$scope.labels = ["Presentation", "Discussion", "Group work", "Break"];
 	$scope.days = Agenda.days;
 	

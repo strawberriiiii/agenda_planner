@@ -12,6 +12,10 @@
 	height: 79%;
 }
 
+#addDayButton h2 {
+	font-weight: 200;
+}
+
 .jumbotron.day {
 	margin-top: 30px;
 	height: 750px;
@@ -32,7 +36,9 @@
 }
 
 .well.body {
-	height: 79%;
+	height: 74%;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .timepicker {
@@ -46,4 +52,19 @@
 
 table {
 	margin-right: 0px;
+}
+
+#deleteDayDiv {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#deleteButton {
+	width: 100%;
+	margin: 0px;
+	
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	font-weight: 200;
 }
