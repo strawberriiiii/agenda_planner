@@ -4,16 +4,25 @@
 		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createActivity">
 			{{createActivityButton}}
 		</button>
-		<!--Uses regular HTML table-->
-		<table style="width: 100%">
-			<tbody ng-repeat="p in parkedActivities()">
-				<tr class="activityPreview" draggable="true" id="{{p.getTypeId()}}">
-					<td>{{p.getModifiedTypeId()}}</td>
-					<td>{{p.getName()}}</td>
-					<td>{{p.getLength()}} min</td>
-				<tr>
-			</tbody>
-		</table>
+		
+		<!-- Adds a container for each activity -->
+		<div class="row jumbotron" ng-repeat="p in parkedActivities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')">
+			
+			<!-- drag div -->
+			<div ng-drag="true" ng-drag-data="p">
+				
+				<!--Uses regular HTML table-->
+				<table style="width: 100%">	
+					<tr class="activityPreview" id="{{p.getTypeId()}}" >
+						<td>{{p.getTypeId()}}</td>
+						<td>{{p.getName()}}</td>
+						<td>{{p.getLength()}} min</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+
 	</div>
 
 	<div id="createActivity" class="modal fade" role="dialog" ng-controller="ActivityCtrl as ctrl">

@@ -1,7 +1,7 @@
 <div ng-controller="AgendaCtrl as ctrl">
 	
 	<!-- Adds a container for each created day -->
-	<div class="col-sm-3 jumbotron day" ng-repeat="day in days" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)">
+	<div class="col-sm-3 jumbotron day" ng-repeat="day in days" ng-drop="true" ng-drop-success="onDropCompleteDay($index, $data, $event)">
 		
 		<!-- drag div -->
 		<div id="dragDiv" ng-drag="true" ng-drag-data="day">
@@ -42,17 +42,26 @@
 			</div>
 			
 			<!-- Body of container -->
-			<div class="well body">
-				<table style="width:100%">
-					<tr ng-repeat="activity in day._activities">
-						<td>
-							<p>{{activity._name}}</p>
-						</td>
-						<td>
-							<p>{{activity._length}} {{minute}}</p>
-						</td>
-					</tr>
-				</table>
+			<div class="well body" >
+				
+				<div ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event)">
+					
+					<!-- drag div -->
+					<div ng-drag="true" ng-drag-data="activity">
+						<table style="width: 100%">
+							<tr>
+								<td>
+									<p>{{activity._name}}</p>
+								</td>
+								<td>
+									<p>{{activity._length}} {{minute}}</p>
+								</td>
+							</tr>	
+						</table>
+					</div>
+					
+				</div>
+		
 			</div>
 			
 			<!-- Footer of container -->
