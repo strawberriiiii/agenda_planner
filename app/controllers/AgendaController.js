@@ -11,22 +11,33 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.labels = ["Presentation", "Discussion", "Group work", "Break"];
 	$scope.days = Agenda.days;
 	
+	// Add day
 	$scope.addDay = function(startH, startM) {
 		$scope.update();
 		return Agenda.addDay(startH, startM);
 	};
 	
+	// Remove day
 	$scope.removeDay = function(indexDay) {
 		return Agenda.removeDay(indexDay);
 	};
 	
+	// Drag&Drop of the days
+	$scope.onDropComplete = function(index, obj, evt) {
+		var otherObj = $scope.days[index];
+		var otherIndex = $scope.days.indexOf(obj);
+		$scope.days[index] = obj;
+		$scope.days[otherIndex] = otherObj;
+	};
+	
+	// Draw chart for the percentages of the activities per day
 	$scope.drawGraphic = function(indexDay) {
 		      
 		var whole = $scope.days[indexDay].getTotalLength();	
 		var canvas = document.getElementById('myCanvas').getContext("2d");
 		
 		//Presentation block
-		var partPres = $scope.days[indexDay].getLengthByType("Presentation");
+		var partPres = $scope.days[indexDay].getLengthByType($scope.labels[0]);
 		var perPartPres = round(partPres / whole, 2) * 100;
 		
 		canvas.beginPath();
@@ -36,7 +47,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		canvas.fill();
 		
 		//Disscussion block
-		var partDis = $scope.days[indexDay].getLengthByType("Discussion");
+		var partDis = $scope.days[indexDay].getLengthByType($scope.labels[1]);
 		var perPartDis = round(partDis / whole, 2) * 100;
 
 		canvas.beginPath();
@@ -46,7 +57,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		canvas.fill();
 		
 		//Group work block
-		var partGroup = $scope.days[indexDay].getLengthByType("Group work");
+		var partGroup = $scope.days[indexDay].getLengthByType($scope.labels[2]);
 		var perPartGroup = round(partGroup / whole, 2) * 100;
 		
 		canvas.beginPath();
@@ -56,7 +67,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		canvas.fill();
 				
 		//Break block
-		var partBreak = $scope.days[indexDay].getLengthByType("Break");
+		var partBreak = $scope.days[indexDay].getLengthByType($scope.labels[3]);
 		var perPartBreak = round(partBreak / whole, 2) * 100;
 		
 		canvas.beginPath();
@@ -82,7 +93,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
     	return Number($scope.Math.round(value+'e'+decimals)+'e-'+decimals);
 	}
 	
-	//Timepicker
+	// Timepicker
 	$scope.selectText = "Select the start time!";
 	$scope.mytime = new Date();
   	$scope.hstep = 1;
@@ -100,5 +111,5 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	};
 	
 	$scope.update();
-
+	
 });

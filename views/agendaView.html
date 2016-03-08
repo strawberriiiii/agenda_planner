@@ -1,64 +1,68 @@
 <div ng-controller="AgendaCtrl as ctrl">
 	
 	<!-- Adds a container for each created day -->
-	<div class="col-sm-3 jumbotron day" ng-repeat="day in days">
+	<div class="col-sm-3 jumbotron day" ng-repeat="day in days" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event)">
 		
-		<!-- Header of container -->
-		<div class="alert header" role="alert">
-			<table style="width:100%">
-				<tr>
-					<td>
-						<p>{{startSlot}}</p>
-					</td>
-					<td>
-						<p>{{day.getStart()}}</p>
-					</td>
-					<td rowspan="3">
-						<canvas id="myCanvas" width="75" height="110" ng-init="drawGraphic($index)"></canvas>
-					</td>	
-				</tr>
-				<tr>
-					<td>
-						<p>{{endSlot}}</p>
-					</td>
-					<td>
-						<p>{{day.getEnd()}}</p>
-					</td>
-					
-				</tr>
-				<tr>
-					<td>
-						<p>{{totalLengthSlot}}</p>
-					</td>
-					<td>
-						<p>{{day.getTotalLength()}} {{minute}}</p>
-					</td>
-				</tr>
-			</table>
+		<!-- drag div -->
+		<div id="dragDiv" ng-drag="true" ng-drag-data="day">
 			
+			<!-- Header of container -->
+			<div class="alert header" role="alert">
+				<table style="width:100%">
+					<tr>
+						<td>
+							<p>{{startSlot}}</p>
+						</td>
+						<td>
+							<p>{{day.getStart()}}</p>
+						</td>
+						<td rowspan="3">
+							<canvas id="myCanvas" width="75" height="110" ng-init="drawGraphic($index)"></canvas>
+						</td>	
+					</tr>
+					<tr>
+						<td>
+							<p>{{endSlot}}</p>
+						</td>
+						<td>
+							<p>{{day.getEnd()}}</p>
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							<p>{{totalLengthSlot}}</p>
+						</td>
+						<td>
+							<p>{{day.getTotalLength()}} {{minute}}</p>
+						</td>
+					</tr>
+				</table>
+				
+			</div>
+			
+			<!-- Body of container -->
+			<div class="well body">
+				<table style="width:100%">
+					<tr ng-repeat="activity in day._activities">
+						<td>
+							<p>{{activity._name}}</p>
+						</td>
+						<td>
+							<p>{{activity._length}} {{minute}}</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<!-- Footer of container -->
+			<div class="container" id="deleteDayDiv">
+				<button class="btn btn-danger" ng-click="removeDay($index)" id="deleteButton">
+					{{deleteDay}}
+				</button>
+			</div>
+				
 		</div>
-		
-		<!-- Body of container -->
-		<div class="well body">
-			<table style="width:100%">
-				<tr ng-repeat="activity in day._activities">
-					<td>
-						<p>{{activity._name}}</p>
-					</td>
-					<td>
-						<p>{{activity._length}} {{minute}}</p>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-		<!-- Footer of container -->
-		<div class="container" id="deleteDayDiv">
-			<button class="btn btn-danger" ng-click="removeDay($index)" id="deleteButton">
-				{{deleteDay}}
-			</button>
-		</div>	
-		
 	</div>
 	
 	<!-- Add day button -->
