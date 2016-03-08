@@ -4,13 +4,25 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
     $scope.type = "";
     $scope.activity = {
         'name': '',
-        'minutes': 0,
+        'length': new Date(),
         'description': ''
+    }
+
+    $scope.reset = function() {
+        $scope.activity.name = "";
+	    $scope.activity.length = {
+	        'hours': 0,
+	        'minutes': 0
+	    },
+	    $scope.activity.description = "";
     }
 	
 	//Creates an activity and adds it to the model
 	$scope.createActivity = function() {
-		return Agenda.createActivity($scope.activity.minutes, $scope.activity.name, $scope.type, $scope.activity.description);
+	    this.newActivity = angular.copy($scope.activity);
+	    $scope.reset();
+	    var minutes = this.newActivity.length.hours * 60 + this.newActivity.length.minutes;
+		return Agenda.createActivity(minutes, this.newActivity.name, $scope.type, this.newActivity.description);
 	};
 	
 	//Retrieves list of activities do not belong to a day

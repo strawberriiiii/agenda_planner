@@ -6,7 +6,10 @@
     padding-top: 10px;
     border-radius: 2px;
     float: left;
-    min-height: 800px;
+    min-height: 809px;
+    width: 300px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 #sidebar button {
