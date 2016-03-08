@@ -44,4 +44,9 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 		}
 	};
 
+	$scope.submitButtonDisabled = function() {
+	    return $scope.activity.name === "" || $scope.activity.minutes === 0 || $scope.activity.description === "" || $scope.type === "";
+	};
+
+
 });
