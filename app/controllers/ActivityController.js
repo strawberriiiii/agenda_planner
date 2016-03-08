@@ -6,9 +6,11 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
         'name': '',
         'length': new Date(),
         'description': ''
-    }
+    };
     $scope.hstep = 1;
  	$scope.mstep = 1;
+ 	$scope.parkedActivities = Agenda.parkedActivities;
+	$scope.days = Agenda.days;
 
     $scope.reset = function() {
         $scope.activity.name = "";
@@ -26,10 +28,6 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 		return Agenda.createActivity(minutes, this.newActivity.name, $scope.type, this.newActivity.description);
 	};
 	
-	//Retrieves list of activities do not belong to a day
-	$scope.parkedActivities = Agenda.parkedActivities;
-	$scope.days = Agenda.days;
-	
 	//Add Activity Button
 	$scope.createActivityButton = "Add Activity";
 	
@@ -44,6 +42,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	// Drag&Drop of the activities
 	$scope.onDropCompleteActivity = function(index, obj, evt, location) {
 		
+		// if an activity from the sidebar is drag&droped in the sidebar
 		if (location == "sidebar") {
 			var otherObj = $scope.parkedActivities[index];
 			var otherIndex = $scope.parkedActivities.indexOf(obj);
@@ -51,9 +50,13 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 			$scope.parkedActivities[otherIndex] = otherObj;
 			
 		} else {
-			var otherIndex = $scope.parkedActivities.indexOf(obj);
-			$scope.parkedActivities.splice(otherIndex, 1);
-			$scope.days[0]._addActivity(obj);
+			var otherIndex = $scope.days[location].length;
+			Agenda.moveActivity(null, index, location, otherIndex);
+		
+			$scope.parkedActivities.splice(index, 1);
+			//$scope.days[0]._addActivity(obj);
+			console.log($scope.parkedActivites);
+			console.log($scope.days[location].activities);
 		}
 	};
 

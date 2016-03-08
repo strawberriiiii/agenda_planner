@@ -1,4 +1,4 @@
-angular.module('agendaPlanner', ['agendaPlanner.MainController', 'agendaPlanner.AgendaController', 'agendaPlanner.ActivityController', 'ngRoute', 'ui.bootstrap', 'ngDraggable'])
+angular.module('agendaPlanner', ['agendaPlanner.MainController', 'agendaPlanner.AgendaController', 'agendaPlanner.ActivityController', 'ngRoute', 'ui.bootstrap', 'ngDraggable', 'dndLists'])
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {
 		controller : 'MainCtrl',

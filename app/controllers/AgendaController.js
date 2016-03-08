@@ -30,6 +30,17 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		$scope.days[otherIndex] = otherObj;
 	};
 	
+	// Drag&Drop of the activities
+	/*$scope.onDropCompleteActvitiy = function(index, ob, evt, location) {
+		var otherIndex = $scope.days[location].length;
+			Agenda.moveActivity(null, index, location, otherIndex);
+		
+			$scope.days.parkedActivities.splice(index, 1);
+			//$scope.days[0]._addActivity(obj);
+			console.log($scope.days.parkedActivites);
+			console.log($scope.days[location].activities);
+	};*/
+	
 	// Draw chart for the percentages of the activities per day
 	$scope.drawGraphic = function(indexDay) {
 		      

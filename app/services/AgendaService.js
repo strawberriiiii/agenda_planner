@@ -15,6 +15,8 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		} else {
 			day = new Day(8,0);
 		}
+		// TODO remove this line
+		day._addActivity(new Activity(20, "Final Presentation", "Presentation", "final"));
 		o.days.push(day);
 		return day;
 	};
