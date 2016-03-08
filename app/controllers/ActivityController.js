@@ -66,5 +66,4 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 
 	$scope.reset();
 
-
 });
