@@ -6,7 +6,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
         'name': '',
         'minutes': 0,
         'description': ''
-    }
+    };
 	
 	//Creates an activity and adds it to the model
 	$scope.createActivity = function() {
@@ -14,9 +14,8 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	};
 	
 	//Retrieves list of activities do not belong to a day
-	$scope.parkedActivities = function() {
-		return Agenda.parkedActivities;
-	};
+	$scope.parkedActivities = Agenda.parkedActivities;
+	$scope.days = Agenda.days;
 	
 	//Add Activity Button
 	$scope.createActivityButton = "Add Activity";
@@ -27,6 +26,22 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	//Sets the activity type
 	$scope.setType = function(id) {
         $scope.type = id;
+	};
+
+	// Drag&Drop of the activities
+	$scope.onDropCompleteActivity = function(index, obj, evt, location) {
+		
+		if (location == "sidebar") {
+			var otherObj = $scope.parkedActivities[index];
+			var otherIndex = $scope.parkedActivities.indexOf(obj);
+			$scope.parkedActivities[index] = obj;
+			$scope.parkedActivities[otherIndex] = otherObj;
+			
+		} else {
+			var otherIndex = $scope.parkedActivities.indexOf(obj);
+			$scope.parkedActivities.splice(otherIndex, 1);
+			$scope.days[0]._addActivity(obj);
+		}
 	};
 
 });

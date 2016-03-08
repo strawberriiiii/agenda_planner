@@ -23,7 +23,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	};
 	
 	// Drag&Drop of the days
-	$scope.onDropComplete = function(index, obj, evt) {
+	$scope.onDropCompleteDay = function(index, obj, evt) {
 		var otherObj = $scope.days[index];
 		var otherIndex = $scope.days.indexOf(obj);
 		$scope.days[index] = obj;
