@@ -39,7 +39,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$scope.setType = function(id) {
         $scope.type = id;
 	};
-
+	
 	// Drag&Drop of the activities
 	$scope.onDropCompleteActivity = function(index, obj, evt, location) {
 		

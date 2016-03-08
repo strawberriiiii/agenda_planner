@@ -42,9 +42,9 @@
 			</div>
 			
 			<!-- Body of container -->
-			<div class="well body" >
+			<div class="well body">
 				
-				<div ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event)">
+				<div ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="day.moveActivity(null, 0, 0, 0)">
 					
 					<!-- drag div -->
 					<div ng-drag="true" ng-drag-data="activity">
