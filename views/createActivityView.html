@@ -30,7 +30,7 @@
 				<div class="btn-group" role="group" id="activityType">
 					<button type="button" class="btn btn-primary" ng-click="setType('Presentation')">Presentation</button>
 					<button type="button" class="btn btn-success" ng-click="setType('Discussion')">Discussion</button>
-					<button type="button" class="btn btn-danger" ng-click="setType('Group Work')">Group Work</button>
+					<button type="button" class="btn btn-danger" ng-click="setType('GroupWork')">Group Work</button>
 					<button type="button" class="btn btn-warning" ng-click="setType('Break')">Break</button>
 				</div>
 			</fieldset>
@@ -46,6 +46,6 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-		<button type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="createActivity()">Submit</button>
+		<button type="submit" class="btn btn-primary" ng-disabled="submitButtonDisabled()" ng-click="createActivity()">Submit</button>
 	</div>
 </div>

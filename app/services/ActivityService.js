@@ -36,6 +36,13 @@ angular.module('agendaPlanner.ActivityService', [])
 		getTypeId: function() {
 			return this._type;
 		},
+
+		getModifiedTypeId: function() {
+		    if (this._type === 'GroupWork') {
+		        return "Group Work";
+		    }
+		    return this._type;
+		},
 		
 		//Modifies the name of the activity
 		setName: function(newName) {
