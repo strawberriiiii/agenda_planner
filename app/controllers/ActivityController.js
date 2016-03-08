@@ -7,13 +7,14 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
         'length': new Date(),
         'description': ''
     }
+    $scope.hstep = 1;
+ 	$scope.mstep = 1;
 
     $scope.reset = function() {
         $scope.activity.name = "";
-	    $scope.activity.length = {
-	        'hours': 0,
-	        'minutes': 0
-	    },
+	    $scope.activity.length = new Date();
+	    $scope.activity.length.setHours(0);
+	    $scope.activity.length.setMinutes(0);
 	    $scope.activity.description = "";
     };
 	
@@ -21,7 +22,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$scope.createActivity = function() {
 	    this.newActivity = angular.copy($scope.activity);
 	    $scope.reset();
-	    var minutes = this.newActivity.length.hours * 60 + this.newActivity.length.minutes;
+	    var minutes = this.newActivity.length.getHours() * 60 + this.newActivity.length.getMinutes();
 		return Agenda.createActivity(minutes, this.newActivity.name, $scope.type, this.newActivity.description);
 	};
 	
@@ -59,6 +60,8 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$scope.submitButtonDisabled = function() {
 	    return $scope.activity.name === "" || $scope.activity.minutes === 0 || $scope.activity.description === "" || $scope.type === "";
 	};
+
+	$scope.reset();
 
 
 });
