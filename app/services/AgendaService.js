@@ -25,8 +25,8 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	};
 	
 	//Create the activity
-	o.createActivity = function(hours, minutes, name, type) {
-		var activity = new Activity(hours, minutes, name, type);
+	o.createActivity = function(minutes, name, type, description) {
+		var activity = new Activity(minutes, name, type, description);
 		o.addParkedActivity(activity, null);
 	};
 	
