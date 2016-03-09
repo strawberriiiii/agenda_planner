@@ -1,10 +1,10 @@
 <div ng-controller="AgendaCtrl as ctrl">
 	
 	<!-- Adds a container for each created day -->
-	<div class="col-sm-3 jumbotron day" ng-repeat="day in days" ng-drop="true" ng-drop-success="onDropCompleteDay($index, $data, $event)">
+	<div class="col-sm-3 jumbotron day" ng-repeat="day in days"> <!--ng-drop="true" ng-drop-success="onDropCompleteDay($index, $data, $event)">-->
 		
 		<!-- drag div -->
-		<div id="dragDiv" ng-drag="true" ng-drag-data="day">
+		<div id="dragDiv"> <!--ng-drag="true" ng-drag-data="day">-->
 			
 			<!-- Header of container -->
 			<div class="alert header" role="alert">
@@ -44,23 +44,24 @@
 			<!-- Body of container -->
 			<div class="well body" ng-controller="ActivityCtrl">
 				
-				<div ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, $parent.$index)">
+			<div class="row dropzone" ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, $parent.$index)">
 					
-					<!-- drag div -->
-					<div ng-drag="true" ng-drag-data="activity">
-						<table style="width: 100%">
+					<!-- drag div--> 
+					<div class="activityPreview" ng-drag="true" ng-drag-data="[activity, $parent.$index]">
+						<table id="{{activity.getTypeId()}}" style="width: 100%">
 							<tr>
 								<td>
 									<p>{{activity._name}}: </p>
 								</td>
-								<td>
+								<td id="lengthCol">
 									<p>{{activity.getStringLength()}}</p>
 								</td>
 							</tr>	
 						</table>
 					</div>	
 										
-				</div>
+			</div>
+			<div class="dropzone empty" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, $index)"></div>
 		
 			</div>
 			
@@ -87,21 +88,5 @@
 			<h2>{{addDayButton}}</h2>
 		</button>
 	</div>
-	
-	<!--<div class="col-md-10">
-    <div class="row">
-        <div ng-repeat="(zone, list) in models.dropzones" class="col-md-6">
-            <div class="dropzone box box-yellow">
-                <!-- The dropzone also uses the list template -->
-                <!--<h3>Dropzone {{zone}}</h3>
-                <div ng-include="'list.html'"></div>
-            </div>
-        </div>
-    </div>
 
-    <div view-source="nested"></div>
-
-    <h2>Generated Model</h2>
-    <pre>{{modelAsJson}}</pre>
-</div>-->
 </div>

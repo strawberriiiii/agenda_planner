@@ -39,27 +39,52 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
         $scope.type = id;
 	};
 	
-	// Drag&Drop of the activities
-	$scope.onDropCompleteActivity = function(index, obj, evt, location) {
+	$scope.onDropCompleteActivity = function(index, fullObj, evt, location) {
+		var obj = fullObj[0];
+		var originLocation = fullObj[1];
+		console.log(originLocation);
+		console.log(location);
 		
-		// if an activity from the sidebar is drag&droped in the sidebar
-		if (location == "sidebar") {
+		// if an activity is draged and droped within the sidebar
+		if (location == originLocation && location == 'sidebar') {
 			var otherObj = $scope.parkedActivities[index];
 			var otherIndex = $scope.parkedActivities.indexOf(obj);
 			$scope.parkedActivities[index] = obj;
 			$scope.parkedActivities[otherIndex] = otherObj;
-			
-		} else {
-			var otherIndex = $scope.days[location].length;
-			Agenda.moveActivity(null, index, location, otherIndex);
-		
-			$scope.parkedActivities.splice(index, 1);
-			//$scope.days[0]._addActivity(obj);
-			console.log($scope.parkedActivites);
-			console.log($scope.days[location].activities);
+			console.log("Path 1: " + $scope.parkedActivities);	
+		} 
+		// if an activity from the sidebar is draged and droped to a day
+		else if (originLocation == 'sidebar' && location != 'sidebar') {
+			var otherIndex = $scope.parkedActivities.indexOf(obj);
+			$scope.days[location]._activities.splice(index, 0, obj);
+			$scope.parkedActivities.splice(otherIndex, 1);
+			console.log("Path 2 " + $scope.days[location]._activities + ", " + $scope.parkedActivities);	
+		} 
+		// if an activity from a day is draged and droped to the sidebar
+		else if (originLocation != 'sidebar' && location == 'sidebar') {
+			var otherIndex = $scope.days[originLocation]._activities.indexOf(obj);
+			$scope.parkedActivities.splice(index, 0, obj);
+			$scope.days[originLocation]._activities.splice(otherIndex, 1);
+			console.log("Path 3: " + $scope.parkedActivities + ", " + $scope.days[originLocation]._activities);	
 		}
+		// if an activity is draged and droped within a day
+		else if (location == originLocation && location != 'sidebar') {
+			var otherObj = $scope.days[location]._activities[index];
+			var otherIndex = $scope.days[location]._activities.indexOf(obj);
+			$scope.days[location]._activities[index] = obj;
+			$scope.days[location]._activities[otherIndex] = otherObj;
+			console.log("Path 4: " + $scope.days[location]._activities);	
+		}
+		// if an activity from one day is draged and droped to another day
+		else {		
+			var otherIndex = $scope.days[originLocation]._activities.indexOf(obj);
+			$scope.days[location]._activities.splice(index, 0, obj);
+			$scope.days[originLocation]._activities.splice(otherIndex, 1);
+			console.log("Path 5: " + $scope.days[location]._activities + ", " + $scope.days[originLocation]._activities);	
+		}
+		$scope.originLocation = null;
 	};
-
+	
 	$scope.submitButtonDisabled = function() {
 	    return $scope.activity.name === "" || $scope.activity.minutes === 0 || $scope.activity.description === "" || $scope.type === "";
 	};
