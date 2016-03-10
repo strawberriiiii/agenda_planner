@@ -17,6 +17,7 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		}
 		// TODO remove this line
 		day._addActivity(new Activity(20, "Final Presentation", "Presentation", "final"));
+		day._addActivity(new Activity(30, "Break", "Break", "break"));
 		o.days.push(day);
 		return day;
 	};
@@ -30,6 +31,12 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	o.createActivity = function(minutes, name, type, description) {
 		var activity = new Activity(minutes, name, type, description);
 		o.addParkedActivity(activity, null);
+		o.parkedActivitiesString();
+		console.log(o.parkedActivities);
+	};
+	
+	o.parkedActivitiesString = function() {
+		return "{day : " + o.parkedActivities + "}";
 	};
 	
 	// add an activity to model
@@ -53,32 +60,6 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	o.removeParkedActivity = function(position) {
 		act = o.parkedActivities.splice(position, 1)[0];
 		return act;
-	};
-	
-	// moves activity between the days, or day and parked activities.
-	// to park activity you need to set the new day to null
-	// to move a parked activity to let's say day 0 you set oldday to null
-	// and new day to 0
-	o.moveActivity = function(oldday, oldposition, newday, newposition) {
-		if (oldday !== null && oldday == newday) {
-			o.days[oldday]._moveActivity(oldposition, newposition);
-			
-		} else if (oldday == null && newday == null) {
-			var activity = o.removeParkedActivity(oldposition);
-			o.addParkedActivity(activity, newposition);
-			
-		} else if (oldday == null) {
-			var activity = o.removeParkedActivity(oldposition);
-			o.days[newday]._addActivity(activity, newposition);
-			
-		} else if (newday == null) {
-			var activity = o.days[oldday]._removeActivity(oldposition);
-			o.addParkedActivity(activity, newposition);
-			
-		} else {
-			var activity = o.days[oldday]._removeActivity(oldposition);
-			o.days[newday]._addActivity(activity, newposition);
-		}
 	};
 
 	return o;

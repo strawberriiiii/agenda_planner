@@ -95,19 +95,6 @@ angular.module('agendaPlanner.DayService', [])
 		_removeActivity: function(position) {
 			return this._activities.splice(position,1)[0];
 		},
-			
-		// moves activity inside one day
-		// this method will be called when needed from the model
-		// don't call it directly
-		_moveActivity: function(oldposition,newposition) {
-			// In case new position is greater than the old position and we are not moving
-			// to the last position of the array
-			if(newposition > oldposition && newposition < this._activities.length - 1) {
-				newposition--;
-			}
-			var activity = this._removeActivity(oldposition);
-			this._addActivity(activity, newposition);
-		}
 	};
 	
 	return Day;	

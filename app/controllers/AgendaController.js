@@ -11,14 +11,53 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.labels = ["Presentation", "Discussion", "Group work", "Break"];
 	$scope.days = Agenda.days;
 	
+	// Create activity array for days
+	function dayActivities() {
+		var activities = "{";
+		for (d in $scope.days) {
+			activities += "day : " + $scope.days[d]._activities;
+			if (d < $scope.days.length) {
+				activities += ",";
+			}
+		}
+		return activities + "}";
+	}
+	
+	// Create parked activitiy array
+	function parkedActivities() {
+		return Agenda.parkedActivitiesString();
+	} 
+	
+	$scope.activities = {
+        selected: null,
+        dropzones: {
+            "parked": $scope.days.parkedActivities,
+            "day": $scope.days
+        }
+    };
+	
+	function updateActivities() {
+		$scope.activities = {
+			selected: null, 
+			dropzones: {
+            "parked": $scope.days.parkedActivities,
+            "day": $scope.days
+			}
+		};
+	};
+	
+	
 	// Add day
 	$scope.addDay = function(startH, startM) {
-		$scope.update();
-		return Agenda.addDay(startH, startM);
+		$scope.updateTimePicker();
+		Agenda.addDay(startH, startM);
+		updateActivities();
 	};
 	
 	// Remove day
 	$scope.removeDay = function(indexDay) {
+		console.log(dayActivities());
+		console.log(parkedActivities());
 		return Agenda.removeDay(indexDay);
 	};
 	
@@ -29,17 +68,6 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		$scope.days[index] = obj;
 		$scope.days[otherIndex] = otherObj;
 	};
-	
-	// Drag&Drop of the activities
-	/*$scope.onDropCompleteActvitiy = function(index, ob, evt, location) {
-		var otherIndex = $scope.days[location].length;
-			Agenda.moveActivity(null, index, location, otherIndex);
-		
-			$scope.days.parkedActivities.splice(index, 1);
-			//$scope.days[0]._addActivity(obj);
-			console.log($scope.days.parkedActivites);
-			console.log($scope.days[location].activities);
-	};*/
 	
 	// Draw chart for the percentages of the activities per day
 	$scope.drawGraphic = function(indexDay) {
@@ -110,7 +138,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
   	$scope.hstep = 1;
  	$scope.mstep = 1;
  	
-	$scope.update = function() {
+	$scope.updateTimePicker = function() {
 		var d = new Date();
 	    d.setHours( 8 );
 	    d.setMinutes( 0 );
@@ -121,6 +149,6 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	    $scope.mytime = null;
 	};
 	
-	$scope.update();
+	$scope.updateTimePicker();
 	
 });

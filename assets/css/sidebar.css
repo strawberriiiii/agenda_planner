@@ -15,42 +15,10 @@
 }
 
 #sidebar button {
+    width: 100%;
+    font-weight: 200;
+    font-size: 27px;
     margin-bottom: 10px;
 }
 
-.activityPreview {
-    border: 1px solid black;
-    padding: 5px;
-    height: 25px;
-}
 
-.activityPreview:hover {
-    cursor: pointer;
-    
-}
-
-#GroupWork {
-    background-color: #ffcccc;
-}
-
-#Break {
-    background-color: #ffff99;
-}
-
-#Presentation {
-    background-color: #99c2ff;
-}
-
-#Discussion {
-    background-color: #99ff99;
-}
-
-#rowActivity {
-	background-color: white;
-}
-
-.row.jumbotron {
-	height: 26px;
-	padding: 0px;
-	margin-bottom: 0px;
-}
