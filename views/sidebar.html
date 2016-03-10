@@ -6,22 +6,29 @@
 		</button>
 		
 		<!-- Adds a container for each activity -->
-		<div class="row jumbotron" ng-repeat="p in parkedActivities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')">
+		<div class="row dropzone" ng-repeat="p in parkedActivities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')">
 			
 			<!-- drag div -->
-			<div ng-drag="true" ng-drag-data="p">
+			<div class="activityPreview" ng-drag="true" ng-drag-data="[p, 'sidebar']">
 				
 				<!--Uses regular HTML table-->
-				<table style="width: 100%">	
-					<tr class="activityPreview" id="{{p.getTypeId()}}" >
-						<td>{{p.getModifiedTypeId()}}</td>
-						<td>{{p.getName()}}</td>
-						<td>{{p.getLength()}} min</td>
+				<table id="{{p.getTypeId()}}" style="width: 100%">	
+					<tr>
+						<td>
+							<p>{{p.getTypeId()}}</p>
+						</td>
+						<td>
+							<p>{{p.getName()}}</p>
+						</td>
+						<td>
+							<p>{{p.getLength()}} min</p>
+						</td>
 					</tr>
 				</table>
 
 			</div>
 		</div>
+		<div class="dropzone empty sidebar" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')"></div>
 
 	</div>
 
