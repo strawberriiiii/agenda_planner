@@ -5,7 +5,7 @@
 	padding: 0px;
 	background-color: #d4dddd;
 	border-style: solid;
-	border-width: 1px; 
+	border-width: 1px;
 }
 
 .dropzone.empty {
@@ -21,11 +21,11 @@
 .activityPreview {
     margin: 0px;
     padding-bottom: 0px;
+    overflow: hidden;
 }
 
 .activityPreview:hover {
     cursor: pointer;
-    
 }
 
 .activityPreview table {

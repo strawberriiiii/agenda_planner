@@ -72,8 +72,15 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	// Draw chart for the percentages of the activities per day
 	$scope.drawGraphic = function(indexDay) {
 		      
-		var whole = $scope.days[indexDay].getTotalLength();	
-		var canvas = document.getElementById('myCanvas').getContext("2d");
+		var whole = $scope.days[indexDay].getTotalLength();
+		var allCanvases = document.getElementsByTagName('canvas');
+		var canvas;
+		for (var i = 0; i < allCanvases.length; i++) {
+		    if (i === indexDay) {
+		        canvas = allCanvases[i].getContext("2d");
+		    }
+		}
+
 		
 		//Presentation block
 		var partPres = $scope.days[indexDay].getLengthByType($scope.labels[0]);

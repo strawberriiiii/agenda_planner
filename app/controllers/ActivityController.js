@@ -38,6 +38,13 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$scope.setType = function(id) {
         $scope.type = id;
 	};
+
+	$scope.getModifiedTypeId = function() {
+	    if ($scope.type === 'GroupWork') {
+	        return 'Group Work';
+	    }
+	    return $scope.type;
+	};
 	
 	$scope.onDropCompleteActivity = function(index, fullObj, evt, location) {
 		var obj = fullObj[0];
@@ -45,7 +52,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 		console.log(originLocation);
 		console.log(location);
 		
-		// if an activity is draged and droped within the sidebar
+		// if an activity is dragged and dropped within the sidebar
 		if (location == originLocation && location == 'sidebar') {
 			var otherObj = $scope.parkedActivities[index];
 			var otherIndex = $scope.parkedActivities.indexOf(obj);
@@ -53,21 +60,21 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 			$scope.parkedActivities[otherIndex] = otherObj;
 			console.log("Path 1: " + $scope.parkedActivities);	
 		} 
-		// if an activity from the sidebar is draged and droped to a day
+		// if an activity from the sidebar is dragged and dropped to a day
 		else if (originLocation == 'sidebar' && location != 'sidebar') {
 			var otherIndex = $scope.parkedActivities.indexOf(obj);
 			$scope.days[location]._activities.splice(index, 0, obj);
 			$scope.parkedActivities.splice(otherIndex, 1);
-			console.log("Path 2 " + $scope.days[location]._activities + ", " + $scope.parkedActivities);	
+			console.log("Path 2 " + $scope.days[location]._activities + ", " + $scope.parkedActivities);
 		} 
-		// if an activity from a day is draged and droped to the sidebar
+		// if an activity from a day is dragged and dropped to the sidebar
 		else if (originLocation != 'sidebar' && location == 'sidebar') {
 			var otherIndex = $scope.days[originLocation]._activities.indexOf(obj);
 			$scope.parkedActivities.splice(index, 0, obj);
 			$scope.days[originLocation]._activities.splice(otherIndex, 1);
 			console.log("Path 3: " + $scope.parkedActivities + ", " + $scope.days[originLocation]._activities);	
 		}
-		// if an activity is draged and droped within a day
+		// if an activity is dragged and dropped within a day
 		else if (location == originLocation && location != 'sidebar') {
 			var otherObj = $scope.days[location]._activities[index];
 			var otherIndex = $scope.days[location]._activities.indexOf(obj);
@@ -75,7 +82,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 			$scope.days[location]._activities[otherIndex] = otherObj;
 			console.log("Path 4: " + $scope.days[location]._activities);	
 		}
-		// if an activity from one day is draged and droped to another day
+		// if an activity from one day is dragged and dropped to another day
 		else {		
 			var otherIndex = $scope.days[originLocation]._activities.indexOf(obj);
 			$scope.days[location]._activities.splice(index, 0, obj);

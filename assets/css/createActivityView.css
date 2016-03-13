@@ -2,36 +2,16 @@
     display: block;
 }
 
-#activityType .btn-primary {
-    background-color: #99c2ff;
-    color: black;
-}
-
 #activityType .btn-primary:focus {
     border: 2px solid #00004d;
-}
-
-#activityType .btn-success {
-    background-color: #99ff99;
-    color: black;
 }
 
 #activityType .btn-success:focus {
     border: 2px solid #003300;
 }
 
-#activityType .btn-danger {
-    background-color: #ffcccc;
-    color: black;
-}
-
 #activityType .btn-danger:focus {
     border: 2px solid #660000;
-}
-
-#activityType .btn-warning {
-    background-color: #ffff99;
-    color: black;
 }
 
 #activityType .btn-warning:focus {
