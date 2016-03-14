@@ -22,7 +22,10 @@
 	width: 300px;
 	margin-right: 20px;
 	padding: 0px;
-	z-index: -1;
+}
+
+.col-sm-3 {
+    position: static;
 }
 
 .alert.header {
