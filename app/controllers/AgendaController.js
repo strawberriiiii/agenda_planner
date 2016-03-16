@@ -11,6 +11,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.labels = Agenda.labels;
 	$scope.days = Agenda.days;
 	
+	
 	// Create activity array for days
 	function dayActivities() {
 		var activities = "{";
@@ -56,15 +57,21 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	
 	// Remove day
 	$scope.removeDay = function(indexDay) {
-		return Agenda.removeDay(indexDay);
+		if (confirm("Are you sure you want to delete this day?")) {
+			return Agenda.removeDay(indexDay);
+		}
 	};
 	
 	// Drag&Drop of the days
 	$scope.onDropCompleteDay = function(index, obj, evt) {
-		var otherObj = $scope.days[index];
-		var otherIndex = $scope.days.indexOf(obj);
-		$scope.days[index] = obj;
-		$scope.days[otherIndex] = otherObj;
+		if ('_start' in obj) {
+		   	var otherObj = $scope.days[index];
+			var otherIndex = $scope.days.indexOf(obj);
+			$scope.days[index] = obj;
+			$scope.days[otherIndex] = otherObj;
+		} else {
+			alert("Please move the activity in the provided dropzone for activities!");
+		}
 	};
 	
 	// Draw chart for the percentages of the activities per day

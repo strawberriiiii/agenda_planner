@@ -25,6 +25,13 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	
 	// remove a specific day to avoid an overload of days in the agenda
 	o.removeDay = function(index) {
+		// move the activities from the day to the parked activities
+		/*if (o.days[index]._activities.length != 0) {
+			for (x in o.days[index]._activities) {
+				o.parkedActivities.push(o.days[index]._activities[x]);
+			} 
+		}*/
+		
 		o.days.splice(index, 1);
 	};
 	
