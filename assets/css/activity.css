@@ -1,5 +1,5 @@
 .dropzone {
-	height: 7%;
+	height: 6%;
 	margin: 0px;
 	margin-top: 1px;
 	padding: 0px;
@@ -15,7 +15,7 @@
 }
 
 .dropzone.empty.sidebar {
-	min-height: 800px;
+	min-height: 750px;
 }
 
 .activityPreview {
@@ -41,7 +41,7 @@
 .activityPreview p {
 	margin: 3px;
 	color: white;
-	font-size: 22px;
+	font-size: 18px;
 }
 
 #lengthCol {
