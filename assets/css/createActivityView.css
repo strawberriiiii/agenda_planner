@@ -2,6 +2,10 @@
     display: block;
 }
 
+input[type="submit"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+.btn-primary::-moz-focus-inner { background-color: #00004d; }
+
 #activityType .btn-primary:focus {
     background-color: #00004d;
 }
