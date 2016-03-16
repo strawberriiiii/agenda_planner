@@ -10,13 +10,12 @@
 			</a>
 			<table style="width:100%">
 				<tr>
-					<td>
+					<td id="cell1">
 						<p>{{startSlot}}</p>
 					</td>
-					<td>
-						<!--<input class="form-control" type="text" ng-model="day._start">-->
-						<p>{{day.getStart()}}</p>
-						</td>
+					<td id="cell2">
+						<input class="form-control" type="text" ng-model="day.startTime" ng-change="day.updateStartTime()" ng-required="true" ng-minlength="3" ng-maxlength="5">
+					</td>
 					<td rowspan="3">
 						<canvas width="75" height="110" ng-init="drawGraphic($index)"></canvas>
 					</td>	
@@ -25,7 +24,7 @@
 					<td>
 						<p>{{endSlot}}</p>
 					</td>
-					<td>
+					<td id="cell2">
 						<p>{{day.getEnd()}}</p>
 					</td>
 						
@@ -34,7 +33,7 @@
 					<td>
 						<p>{{totalLengthSlot}}</p>
 					</td>
-					<td>
+					<td id="cell2">
 						<p>{{day.getTotalLength()}} {{minute}}</p>
 					</td>
 				</tr>

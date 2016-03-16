@@ -6,6 +6,8 @@ angular.module('agendaPlanner.DayService', [])
 	function Day(startH,startM) {
 		this._start = startH * 60 + startM;
 		this._activities = [];
+		
+		this.startTime = this.getStart();
 	}
 	
 	Day.prototype = {
@@ -14,6 +16,21 @@ angular.module('agendaPlanner.DayService', [])
 		// sets the start time to new value
 		setStart: function(startH,startM) {
 			this._start = startH * 60 + startM;
+		},
+		
+		// updates the start time
+		updateStartTime: function() {
+			var h, m;
+			
+			if (this.startTime.indexOf(":") == 1) {
+				h = parseInt(this.startTime.slice(0,1));
+				m = parseInt(this.startTime.slice(2,4));
+			} else {
+				h = parseInt(this.startTime.slice(0,2));
+				m = parseInt(this.startTime.slice(3,5));
+			}	
+
+			this.setStart(h, m);
 		},
 		
 		// returns the total length of the activities in 
