@@ -8,7 +8,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.totalLengthSlot = "Total Length: ";
 	$scope.minute = "min";
 	$scope.deleteDay = "Delete Day";
-	$scope.labels = ["Presentation", "Discussion", "Group work", "Break"];
+	$scope.labels = Agenda.labels;
 	$scope.days = Agenda.days;
 	
 	// Create activity array for days
@@ -56,8 +56,6 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	
 	// Remove day
 	$scope.removeDay = function(indexDay) {
-		console.log(dayActivities());
-		console.log(parkedActivities());
 		return Agenda.removeDay(indexDay);
 	};
 	
@@ -71,73 +69,8 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	
 	// Draw chart for the percentages of the activities per day
 	$scope.drawGraphic = function(indexDay) {
-		      
-		var whole = $scope.days[indexDay].getTotalLength();
-		var allCanvases = document.getElementsByTagName('canvas');
-		var canvas;
-		for (var i = 0; i < allCanvases.length; i++) {
-		    if (i === indexDay) {
-		        canvas = allCanvases[i].getContext("2d");
-		    }
-		}
-
-		
-		//Presentation block
-		var partPres = $scope.days[indexDay].getLengthByType($scope.labels[0]);
-		var perPartPres = round(partPres / whole, 2) * 100;
-		
-		canvas.beginPath();
-		canvas.fillStyle = "#337ab7";
-		canvas.strokeStyle = "#2e6da4";
-		canvas.rect(10, 1, 50, perPartPres);
-		canvas.fill();
-		
-		//Disscussion block
-		var partDis = $scope.days[indexDay].getLengthByType($scope.labels[1]);
-		var perPartDis = round(partDis / whole, 2) * 100;
-
-		canvas.beginPath();
-		canvas.fillStyle = "#5cb85c";
-		canvas.strokeStyle = "#4cae4c";
-		canvas.rect(10, perPartPres, 50, perPartDis);
-		canvas.fill();
-		
-		//Group work block
-		var partGroup = $scope.days[indexDay].getLengthByType($scope.labels[2]);
-		var perPartGroup = round(partGroup / whole, 2) * 100;
-		
-		canvas.beginPath();
-		canvas.fillStyle = "#d9534f";
-		canvas.strokeStyle = "#d43f3a";
-		canvas.rect(10, perPartPres + perPartDis, 50, perPartGroup);
-		canvas.fill();
-				
-		//Break block
-		var partBreak = $scope.days[indexDay].getLengthByType($scope.labels[3]);
-		var perPartBreak = round(partBreak / whole, 2) * 100;
-		
-		canvas.beginPath();
-		canvas.fillStyle = "#f0ad4e";
-		canvas.strokeStyle = "#eea236";
-		canvas.rect(10, perPartPres + perPartDis + perPartGroup, 50, perPartBreak);
-		canvas.fill();
-		
-		//Minimum break line 
-		if (whole > 0) {
-			canvas.beginPath();
-			canvas.strokeStyle = "red";
-			canvas.moveTo(1, 70);
-			canvas.lineTo(70, 70);
-			canvas.stroke();
-		}
-				
-		console.log(whole, perPartPres, perPartDis, perPartGroup, perPartBreak);		
+		Agenda.drawGraphic(indexDay);				
 	};
-	
-	function round(value, decimals) {
-		$scope.Math = window.Math;
-    	return Number($scope.Math.round(value+'e'+decimals)+'e-'+decimals);
-	}
 	
 	// Timepicker
 	$scope.selectText = "Select the start time!";

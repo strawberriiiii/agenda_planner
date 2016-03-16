@@ -3,7 +3,8 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	
 	var o = {
 		days: [],
-		parkedActivities: []
+		parkedActivities: [],
+		labels: ["Presentation", "Discussion", "GroupWork", "Break"]
 	};
 	
 	// adds a new day. if startH and startM (start hours and minutes)
@@ -60,6 +61,88 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	o.removeParkedActivity = function(position) {
 		act = o.parkedActivities.splice(position, 1)[0];
 		return act;
+	};
+	
+	// draw chart for the percentages of the activities per day
+	o.drawGraphic = function(indexDay) {
+		var whole = o.days[indexDay].getTotalLength();
+		var allCanvases = document.getElementsByTagName('canvas');
+		var canvas;
+		for (var i = 0; i < allCanvases.length; i++) {
+		    if (i === indexDay) {
+		        canvas = allCanvases[i].getContext("2d");
+		    }
+		}
+
+		
+		//Presentation block
+		var partPres = o.days[indexDay].getLengthByType(o.labels[0]);
+		var perPartPres = round(partPres / whole, 2) * 100;
+		
+		canvas.beginPath();
+		canvas.fillStyle = "#337ab7";
+		canvas.strokeStyle = "#2e6da4";
+		canvas.rect(10, 0, 50, perPartPres);
+		canvas.fill();
+		
+		//Disscussion block
+		var partDis = o.days[indexDay].getLengthByType(o.labels[1]);
+		var perPartDis = round(partDis / whole, 2) * 100;
+
+		canvas.beginPath();
+		canvas.fillStyle = "#5cb85c";
+		canvas.strokeStyle = "#4cae4c";
+		canvas.rect(10, perPartPres, 50, perPartDis);
+		canvas.fill();
+		
+		//Group work block
+		var partGroup = o.days[indexDay].getLengthByType(o.labels[2]);
+		console.log(partGroup);
+		var perPartGroup = round(partGroup / whole, 2) * 100;
+		
+		canvas.beginPath();
+		canvas.fillStyle = "#d9534f";
+		canvas.strokeStyle = "#d43f3a";
+		canvas.rect(10, perPartPres + perPartDis, 50, perPartGroup);
+		canvas.fill();
+				
+		//Break block
+		var partBreak = o.days[indexDay].getLengthByType(o.labels[3]);
+		var perPartBreak = round(partBreak / whole, 2) * 100;
+		
+		canvas.beginPath();
+		canvas.fillStyle = "#f0ad4e";
+		canvas.strokeStyle = "#eea236";
+		canvas.rect(10, perPartPres + perPartDis + perPartGroup, 50, perPartBreak);
+		canvas.fill();
+		
+		//Minimum break line 
+		if (whole > 0) {
+			canvas.beginPath();
+			canvas.strokeStyle = "red";
+			canvas.moveTo(1, 70);
+			canvas.lineTo(70, 70);
+			canvas.stroke();
+		}
+				
+		console.log(whole, perPartPres, perPartDis, perPartGroup, perPartBreak);
+	};
+	
+	function round(value, decimals) {
+		var math = window.Math;
+    	return Number(math.round(value+'e'+decimals)+'e-'+decimals);
+	}
+
+	o.clearCanvas = function(indexDay) {
+		var allCanvases = document.getElementsByTagName('canvas');
+		var canvas;
+		for (var i = 0; i < allCanvases.length; i++) {
+		    if (i === indexDay) {
+		        canvas = allCanvases[i].getContext("2d");
+		    }
+		}
+		
+		canvas.clearRect(0, 0, 70, 100);
 	};
 
 	return o;

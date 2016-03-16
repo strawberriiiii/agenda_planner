@@ -66,13 +66,21 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 			$scope.days[location]._activities.splice(index, 0, obj);
 			$scope.parkedActivities.splice(otherIndex, 1);
 			console.log("Path 2 " + $scope.days[location]._activities + ", " + $scope.parkedActivities);
+			
+			Agenda.drawGraphic(location);
 		} 
 		// if an activity from a day is dragged and dropped to the sidebar
 		else if (originLocation != 'sidebar' && location == 'sidebar') {
 			var otherIndex = $scope.days[originLocation]._activities.indexOf(obj);
 			$scope.parkedActivities.splice(index, 0, obj);
 			$scope.days[originLocation]._activities.splice(otherIndex, 1);
-			console.log("Path 3: " + $scope.parkedActivities + ", " + $scope.days[originLocation]._activities);	
+			console.log("Path 3: " + $scope.parkedActivities + ", " + $scope.days[originLocation]._activities);
+			
+			if ($scope.days[originLocation]._activities.length == 0) {
+				Agenda.clearCanvas(originLocation);
+			} else {
+				Agenda.drawGraphic(originLocation);	
+			}
 		}
 		// if an activity is dragged and dropped within a day
 		else if (location == originLocation && location != 'sidebar') {
@@ -88,6 +96,13 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 			$scope.days[location]._activities.splice(index, 0, obj);
 			$scope.days[originLocation]._activities.splice(otherIndex, 1);
 			console.log("Path 5: " + $scope.days[location]._activities + ", " + $scope.days[originLocation]._activities);	
+		
+			if ($scope.days[originLocation]._activities.length == 0) {
+				Agenda.clearCanvas(originLocation);
+			} else {
+				Agenda.drawGraphic(originLocation);	
+			}
+			Agenda.drawGraphic(location);
 		}
 		$scope.originLocation = null;
 	};
