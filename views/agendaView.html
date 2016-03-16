@@ -13,7 +13,7 @@
 					<td id="cell1">
 						<p>{{startSlot}}</p>
 					</td>
-					<td id="cell2">
+					<td class="cell2 input">
 						<input class="form-control" type="text" ng-model="day.startTime" ng-change="day.updateStartTime()" ng-required="true" ng-minlength="3" ng-maxlength="5">
 					</td>
 					<td rowspan="3">
@@ -24,7 +24,7 @@
 					<td>
 						<p>{{endSlot}}</p>
 					</td>
-					<td id="cell2">
+					<td class="cell2">
 						<p>{{day.getEnd()}}</p>
 					</td>
 						
@@ -33,7 +33,7 @@
 					<td>
 						<p>{{totalLengthSlot}}</p>
 					</td>
-					<td id="cell2">
+					<td class="cell2">
 						<p>{{day.getTotalLength()}} {{minute}}</p>
 					</td>
 				</tr>

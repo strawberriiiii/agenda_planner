@@ -84,8 +84,8 @@ table {
 
 .form-control {
 	font-weight: 200;
-	font-size: 17px;	
-	width: 60%;
+	font-size: 20px;	
+	width: 67%;
 	margin: 0px;
 	padding: 3px;
 }
@@ -94,9 +94,13 @@ table {
 	padding-top: 11px;
 }
 
-#cell2 {
+.cell2 {
 	padding-left: 10px;
 	width: 95px;
+}
+
+.cell2.input {
+	padding-left: 8px;
 }
 
 [ng-drag].dragging {
