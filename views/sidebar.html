@@ -10,10 +10,13 @@
 			
 			<!-- drag div -->
 			<div class="activityPreview" ng-drag="true" ng-drag-data="[p, 'sidebar']">
-				
+
 				<!--Uses regular HTML table-->
 				<table id="{{p.getTypeId()}}" style="width: 100%">
 					<tr>
+						<td>
+							<button type="button" class="close" ng-click="deleteActivity($index)">&times;</button>
+						</td>
 						<td>
 							<p>{{p.getName()}}:</p>
 						</td>

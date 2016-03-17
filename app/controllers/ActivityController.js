@@ -116,6 +116,10 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    return $scope.activity.name === "" || $scope.activity.minutes === 0 || $scope.activity.description === "" || $scope.type === "";
 	};
 
+	$scope.deleteActivity = function(index) {
+	    Agenda.removeParkedActivity(index);
+	}
+
 	$scope.reset();
 
 });

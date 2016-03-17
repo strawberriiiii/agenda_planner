@@ -20,4 +20,13 @@
     margin-bottom: 10px;
 }
 
+#sidebar button.close {
+    margin-bottom: 0;
+}
+
+.close {
+    color: white;
+    opacity: 1;
+}
+
 

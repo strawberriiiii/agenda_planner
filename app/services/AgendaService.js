@@ -152,5 +152,9 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		canvas.clearRect(0, 0, 70, 100);
 	};
 
+	o.deleteActivityFromDay = function(indexDay, indexActivity) {
+	    o.days[indexDay]._removeActivity(indexActivity);
+	}
+
 	return o;
 });

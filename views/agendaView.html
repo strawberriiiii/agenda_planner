@@ -50,6 +50,9 @@
 				<div class="activityPreview" ng-drag="true" ng-drag-data="[activity, $parent.$index]">
 					<table id="{{activity.getTypeId()}}" style="width: 100%">
 						<tr>
+							<td class="text-center" id="deleteActivity">
+								<button type="button" class="close" ng-click="deleteActivityFromDay($parent.$index, $index)">&times;</button>
+							</td>
 							<td>
 								<p>{{activity._name}}: </p>
 							</td>

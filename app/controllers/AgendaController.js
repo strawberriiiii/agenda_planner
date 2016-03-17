@@ -24,7 +24,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		return activities + "}";
 	}
 	
-	// Create parked activitiy array
+	// Create parked activity array
 	function parkedActivities() {
 		return Agenda.parkedActivitiesString();
 	} 
@@ -95,6 +95,16 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.clear = function() {
 	    $scope.mytime = null;
 	};
+
+	$scope.deleteActivityFromDay = function(dayIndex, activityIndex) {
+        Agenda.deleteActivityFromDay(dayIndex, activityIndex);
+        if ($scope.days[dayIndex]._activities.length == 0) {
+            Agenda.clearCanvas(dayIndex);
+        } else {
+            Agenda.drawGraphic(dayIndex);
+        }
+        Agenda.drawGraphic(dayIndex);
+	}
 	
 	$scope.updateTimePicker();
 	
