@@ -2,28 +2,6 @@
     display: block;
 }
 
-input[type="submit"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-.btn-primary::-moz-focus-inner { background-color: #00004d; }
-
-#activityType .btn-primary:focus {
-    background-color: #00004d;
-    border: 2px solid red;
-    border-radius: 100px;
-}
-
-#activityType .btn-success:focus {
-    background-color: #003300;
-}
-
-#activityType .btn-danger:focus {
-    background-color: #660000;
-}
-
-#activityType .btn-warning:focus {
-    background-color: #808000;
-}
-
 input[type=radio] {
     display:none;
 }

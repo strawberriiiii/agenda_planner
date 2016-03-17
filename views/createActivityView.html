@@ -27,22 +27,19 @@
 			<fieldset class="form-group">
 				<label for="activityType">Type</label>
 				<div class="btn-group" role="group" id="activityType">
-					<button type="button" class="btn btn-primary" ng-click="setType('Presentation')">Presentation</button>
-					<button type="button" class="btn btn-success" ng-click="setType('Discussion')">Discussion</button>
-					<button type="button" class="btn btn-danger" ng-click="setType('GroupWork')">Group Work</button>
-					<button type="button" class="btn btn-warning" ng-click="setType('Break')">Break</button>
+					<input type="radio" id="radio1" name="radios" value="all" ng-click="setType('Presentation')">
+					<label for="radio1" style="color: #337ab7;">Presentation</label>
+					<input type="radio" id="radio2" name="radios"value="false" ng-click="setType('Discussion')">
+					<label for="radio2" style="color: #5cb85c;">Discussion</label>
+					<input type="radio" id="radio3" name="radios" value="true" ng-click="setType('GroupWork')">
+					<label for="radio3" style="color: #d9534f;">Group Work</label>
+					<input type="radio" id="radio4" name="radios" value="true" ng-click="setType('Break')">
+					<label for="radio4" style="color: #f0ad4e;">Break</label>
 				</div>
 				
 			</fieldset>
 
-			<input type="radio" id="radio1" name="radios" value="all" checked>
-       		<label for="radio1">Presentation</label>
-    		<input type="radio" id="radio2" name="radios"value="false">
-       		<label for="radio2">Discussion</label>
-    		<input type="radio" id="radio3" name="radios" value="true">
-       		<label for="radio3">Group Work</label>
-       		<input type="radio" id="radio4" name="radios" value="true">
-       		<label for="radio4">Break</label>
+
 
 			<!-- Description of activity -->
 			<fieldset class="form-group">
