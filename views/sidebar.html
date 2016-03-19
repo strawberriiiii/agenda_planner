@@ -9,7 +9,7 @@
 		<div class="row dropzone" ng-repeat="p in parkedActivities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')">
 			
 			<!-- drag div -->
-			<div class="activityPreview" ng-drag="true" ng-drag-data="[p, 'sidebar']">
+			<div class="activityPreview" ng-click="findActivity($index)" data-toggle="modal" data-target="#editActivity" ng-drag="true" ng-drag-data="[p, 'sidebar']">
 
 				<!--Uses regular HTML table-->
 				<table id="{{p.getTypeId()}}" style="width: 100%">
@@ -36,6 +36,11 @@
 		<div class="modal-dialog modal-md" ng-include="'views/createActivityView.html'">
 
 		</div>
+	</div>
+
+	<div id="editActivity" class="modal fade" role="dialog" ng-controller="ActivityCtrl as ctrl">
+		<div class="modal-dialog modal-md" ng-include="'views/editActivityView.html'"></div>
+
 	</div>
 	
 </div>

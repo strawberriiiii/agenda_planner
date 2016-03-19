@@ -1,0 +1,55 @@
+<!-- Form -->
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" ng-click="reset()">&times;</button>
+		<h4 class="modal-title">Edit this activity</h4>
+	</div>
+	<div class="modal-body">
+
+		<!-- Uses Bootstrap form layout -->
+		<form>
+
+			<!--Name-->
+			<fieldset class="form-group">
+				<label for="activityName">Name</label>
+				<input type="text" class="form-control" id="activityName" placeholder="Enter activity name" ng-model="editActivityName">
+			</fieldset>
+
+			<!-- Length of activity -->
+			<fieldset class="form-group">
+				<label>Length</label>
+				<uib-timepicker class="timepicker" id="activityLength" ng-model="editActivityLength" hour-step="hstep" minute-step="mstep" show-meridian="false">
+				</uib-timepicker>
+			</fieldset>
+
+			<!-- Type of activity -->
+			<!-- Will have to change this to be selected buttons -->
+			<fieldset class="form-group">
+				<label for="activityType">Type</label>
+				<div class="btn-group" role="group" id="activityType">
+					<input type="radio" id="Presentation" name="radios" value="all" ng-click="setEditType('Presentation')">
+					<label for="Presentation" style="color: #337ab7;">Presentation</label>
+					<input type="radio" id="Discussion" name="radios"value="false" ng-click="setEditType('Discussion')">
+					<label for="Discussion" style="color: #5cb85c;">Discussion</label>
+					<input type="radio" id="GroupWork" name="radios" value="true" ng-click="setEditType('GroupWork')">
+					<label for="GroupWork" style="color: #d9534f;">Group Work</label>
+					<input type="radio" id="Break" name="radios" value="true" ng-click="setEditType('Break')">
+					<label for="Break" style="color: #f0ad4e;">Break</label>
+				</div>
+
+			</fieldset>
+
+			<!-- Description of activity -->
+			<fieldset class="form-group">
+				<label for="activityDescription">Description</label>
+				<textarea class="form-control" id="activityDescription" rows="4" ng-model="editActivityDescription"></textarea>
+			</fieldset>
+
+		</form>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="reset()">Cancel</button>
+		<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="$('#createActivity').modal('hide')" ng-click="editActivity()">Submit</button>
+	</div>
+</div>

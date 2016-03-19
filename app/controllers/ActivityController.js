@@ -19,6 +19,8 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    $scope.activity.length.setMinutes(0);
 	    $scope.activity.description = "";
     };
+
+    $scope.reset();
 	
 	//Creates an activity and adds it to the model
 	$scope.createActivity = function() {
@@ -118,8 +120,31 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 
 	$scope.deleteActivity = function(index) {
 	    Agenda.removeParkedActivity(index);
+	};
+
+	$scope.findActivity = function(index) {
+	    $scope.editIndex = index;
+	    var activityToBeEdited = $scope.parkedActivities[index];
+	    $scope.editActivityName = activityToBeEdited.getName();
+	    var length = activityToBeEdited.getLength();
+	    $scope.editActivityLength = new Date();
+	    $scope.editActivityLength.setHours(length / 60);
+	    $scope.editActivityLength.setMinutes(length % 60);
+	    var type = activityToBeEdited.getTypeId();
+	    document.getElementById(type).checked = true;
+	    $scope.editActivityDescription = activityToBeEdited.getDescription();
+	};
+
+	$scope.setEditType = function(type) {
+	    $scope.editType = type;
 	}
 
-	$scope.reset();
+	$scope.editActivity = function() {
+	    $scope.parkedActivities[$scope.editIndex].setName($scope.editActivityName);
+	    $scope.parkedActivities[$scope.editIndex].setLength($scope.editActivityLength.getHours() * 60 + $scope.editActivityLength.getMinutes());
+	    $scope.parkedActivities[$scope.editIndex].setTypeId($scope.editType);
+	    $scope.parkedActivities[$scope.editIndex].setDescription($scope.editActivityDescription);
+	    $scope.reset();
+	};
 
 });
