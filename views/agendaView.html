@@ -16,7 +16,7 @@
 					<td class="cell2 input">
 						<input class="form-control" type="text" ng-model="day.startTime" ng-change="day.updateStartTime()" ng-required="true" ng-minlength="3" ng-maxlength="5">
 					</td>
-					<td rowspan="3">
+					<td rowspan="4">
 						<canvas width="75" height="110" ng-init="drawGraphic($index)"></canvas>
 					</td>	
 				</tr>
@@ -37,6 +37,14 @@
 						<p>{{day.getTotalLength()}} {{minute}}</p>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<p>{{date}}</p>
+					</td>
+					<td class="cell2">
+						<p>{{day.getDate()}}</p>
+					</td>
+				</tr>
 			</table>
 				
 		</div>
@@ -50,14 +58,16 @@
 				<div class="activityPreview" ng-drag="true" ng-drag-data="[activity, $parent.$index]">
 					<table id="{{activity.getTypeId()}}" style="width: 100%">
 						<tr>
-							<td class="text-center" id="deleteActivity">
-								<button type="button" class="close" ng-click="deleteActivityFromDay($parent.$index, $index)">&times;</button>
-							</td>
 							<td>
 								<p>{{activity._name}}: </p>
 							</td>
 							<td id="lengthCol">
 								<p>{{activity.getStringLength()}}</p>
+							</td>
+							<td class="text-center" id="deleteActivity">
+								<button type="button" class="close" ng-click="deleteActivityFromDay($parent.$index, $index)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
 							</td>
 						</tr>	
 					</table>
@@ -81,8 +91,10 @@
 	<div class="col-sm-3 jumbotron dayButton">
 		<div class="alert header" role="alert" id="dayButtonHeader">
 			<p>{{selectText}}</p>
+			
 			<uib-timepicker class="timepicker" ng-model="mytime" hour-step="hstep" minute-step="mstep" show-meridian="false">
 			</uib-timepicker>
+  		
 		</div>
 		<button class="btn btn-success" id="addDayButton" ng-click="addDay(mytime.getHours(), mytime.getMinutes())">
 			<h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></h2>

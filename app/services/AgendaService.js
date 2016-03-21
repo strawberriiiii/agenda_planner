@@ -154,7 +154,7 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 
 	o.deleteActivityFromDay = function(indexDay, indexActivity) {
 	    o.days[indexDay]._removeActivity(indexActivity);
-	}
+	};
 
 	return o;
 });

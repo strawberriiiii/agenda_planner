@@ -7,6 +7,9 @@ angular.module('agendaPlanner.DayService', [])
 		this._start = startH * 60 + startM;
 		this._activities = [];
 		
+		//TODO delete line and belonging methods if date will not be implemented
+		//this._date = new Date();
+		
 		this.startTime = this.getStart();
 	}
 	
@@ -112,6 +115,16 @@ angular.module('agendaPlanner.DayService', [])
 		_removeActivity: function(position) {
 			return this._activities.splice(position,1)[0];
 		},
+		
+		// updates the date of the day
+		setDate: function(date) {
+			this._date = date;
+		},
+		
+		// return the date of the day
+		getDate: function() {
+			return this._date;
+		}
 	};
 	
 	return Day;	

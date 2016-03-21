@@ -47,7 +47,14 @@
 .activityPreview td#deleteActivity {
     margin: 0;
     padding: 0;
+    padding-right: 5px;
+    padding-bottom: 5px;
     width: 15px;
+}
+
+.glyphicon.glyphicon-trash {
+	font-size: 15px;
+	color: #e6e6e6;
 }
 
 #lengthCol {

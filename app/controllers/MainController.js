@@ -7,6 +7,6 @@ angular.module('agendaPlanner.MainController', [])
 	$scope.footerText = "Copyright by Astrid Rauscha & Jessica Spratley - 2016";
 	$scope.showSidebar = function() {
 	    return $location.path() === '/agenda';
-	}
+	};
 	
 });

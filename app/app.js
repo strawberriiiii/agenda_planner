@@ -5,7 +5,10 @@ angular.module('agendaPlanner', ['agendaPlanner.MainController', 'agendaPlanner.
 		templateUrl : 'views/frontView.html'
 	}).when('/agenda', {
 		controller : 'AgendaCtrl',
-		templateUrl : 'views/agendaView.html'	
+		templateUrl : 'views/agendaView.html'
+	}).when('/help', {
+		controller : 'MainCtrl',
+		templateUrl : 'views/help.html'	
 	}).otherwise({
 		redirectTo : '/'
 	}); 

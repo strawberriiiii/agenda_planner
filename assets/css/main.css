@@ -4,10 +4,7 @@
 	color: white;
 	height: 35px;
 	padding-top: 5px;
-}
-
-.footer .container {
-	margin-left: 10px;
+	padding-left: 10px;
 }
 
 .container {
@@ -45,4 +42,29 @@
 
 .row {
     height: 100%;
+}
+
+#bs-example-navbar-collapse-1 ul {
+	margin-left: 100px;
+	padding-left: 100px;
+	margin-top: 30px;
+	border-left: solid 2px white;
+}
+
+#bs-example-navbar-collapse-1 a {
+	color: white;
+	font-weight: 200;
+	font-size: 20px;
+	padding-bottom: 10px;
+	
+}
+
+#bs-example-navbar-collapse-1 a:hover {
+	color: #000000;
+}
+
+.container.help {
+	margin-left: 20%;
+	margin-top: 15px;
+	min-height: 825px;
 }

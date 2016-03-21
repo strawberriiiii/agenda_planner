@@ -15,13 +15,15 @@
 				<table id="{{p.getTypeId()}}" style="width: 100%">
 					<tr>
 						<td>
-							<button type="button" class="close" ng-click="deleteActivity($index)">&times;</button>
-						</td>
-						<td>
 							<p>{{p.getName()}}:</p>
 						</td>
 						<td>
 							<p>{{p.getStringLength()}}</p>
+						</td>
+						<td>
+							<button type="button" class="close" ng-click="deleteActivity($index)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
 						</td>
 					</tr>
 				</table>

@@ -119,7 +119,9 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	};
 
 	$scope.deleteActivity = function(index) {
-	    Agenda.removeParkedActivity(index);
+	    if (confirm("Are you sure you want to delete this activity?")) {
+			Agenda.removeParkedActivity(index);
+		}	    
 	};
 
 	$scope.editedActivity = {

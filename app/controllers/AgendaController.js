@@ -95,16 +95,18 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.clear = function() {
 	    $scope.mytime = null;
 	};
-
+	
 	$scope.deleteActivityFromDay = function(dayIndex, activityIndex) {
-        Agenda.deleteActivityFromDay(dayIndex, activityIndex);
-        if ($scope.days[dayIndex]._activities.length == 0) {
-            Agenda.clearCanvas(dayIndex);
-        } else {
-            Agenda.drawGraphic(dayIndex);
-        }
-        Agenda.drawGraphic(dayIndex);
-	}
+		if (confirm("Are you sure you want to delete this activity?")) {
+				Agenda.deleteActivityFromDay(dayIndex, activityIndex);
+	        if ($scope.days[dayIndex]._activities.length == 0) {
+	            Agenda.clearCanvas(dayIndex);
+	        } else {
+	            Agenda.drawGraphic(dayIndex);
+	        }
+	        Agenda.drawGraphic(dayIndex);
+		}        
+	};
 	
 	$scope.updateTimePicker();
 	
