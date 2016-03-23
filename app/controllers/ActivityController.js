@@ -122,28 +122,35 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    Agenda.removeParkedActivity(index);
 	};
 
+	$scope.editedActivity = {
+	    'name': '',
+	    'length': new Date(),
+	    'description': ''
+	};
+
 	$scope.findActivity = function(index) {
 	    $scope.editIndex = index;
 	    var activityToBeEdited = $scope.parkedActivities[index];
-	    $scope.editActivityName = activityToBeEdited.getName();
+	    $scope.editedActivity.name = activityToBeEdited.getName();
 	    var length = activityToBeEdited.getLength();
-	    $scope.editActivityLength = new Date();
-	    $scope.editActivityLength.setHours(length / 60);
-	    $scope.editActivityLength.setMinutes(length % 60);
-	    var type = activityToBeEdited.getTypeId();
-	    document.getElementById(type).checked = true;
-	    $scope.editActivityDescription = activityToBeEdited.getDescription();
+	    var date = new Date();
+	    date.setHours(length / 60);
+	    date.setMinutes(length % 60);
+	    $scope.editedActivity.length = date;
+	    $scope.editType = activityToBeEdited.getTypeId();
+	    //document.getElementById(type).checked = true;
+	    $scope.editedActivity.description = activityToBeEdited.getDescription();
 	};
 
 	$scope.setEditType = function(type) {
 	    $scope.editType = type;
-	}
+	};
 
 	$scope.editActivity = function() {
-	    $scope.parkedActivities[$scope.editIndex].setName($scope.editActivityName);
-	    $scope.parkedActivities[$scope.editIndex].setLength($scope.editActivityLength.getHours() * 60 + $scope.editActivityLength.getMinutes());
+	    $scope.parkedActivities[$scope.editIndex].setName($scope.editedActivity.name);
+	    $scope.parkedActivities[$scope.editIndex].setLength($scope.editedActivity.length.getHours() * 60 + $scope.editedActivity.length.getMinutes());
 	    $scope.parkedActivities[$scope.editIndex].setTypeId($scope.editType);
-	    $scope.parkedActivities[$scope.editIndex].setDescription($scope.editActivityDescription);
+	    $scope.parkedActivities[$scope.editIndex].setDescription($scope.editedActivity.description);
 	    $scope.reset();
 	};
 

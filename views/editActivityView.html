@@ -12,13 +12,13 @@
 			<!--Name-->
 			<fieldset class="form-group">
 				<label for="activityName">Name</label>
-				<input type="text" class="form-control" id="activityName" placeholder="Enter activity name" ng-model="editActivityName">
+				<input type="text" class="form-control" id="activityName" placeholder="Enter activity name" ng-model="editedActivity.name" ng-required>
 			</fieldset>
 
 			<!-- Length of activity -->
 			<fieldset class="form-group">
 				<label>Length</label>
-				<uib-timepicker class="timepicker" id="activityLength" ng-model="editActivityLength" hour-step="hstep" minute-step="mstep" show-meridian="false">
+				<uib-timepicker class="timepicker" id="activityLength" ng-model="editedActivity.length" hour-step="hstep" minute-step="mstep" show-meridian="false" ng-required>
 				</uib-timepicker>
 			</fieldset>
 
@@ -42,7 +42,7 @@
 			<!-- Description of activity -->
 			<fieldset class="form-group">
 				<label for="activityDescription">Description</label>
-				<textarea class="form-control" id="activityDescription" rows="4" ng-model="editActivityDescription"></textarea>
+				<textarea class="form-control" id="activityDescription" rows="4" ng-model="editedActivity.description" ng-required></textarea>
 			</fieldset>
 
 		</form>
