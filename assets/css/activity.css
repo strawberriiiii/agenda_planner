@@ -52,13 +52,26 @@
     width: 15px;
 }
 
-.glyphicon.glyphicon-trash {
+.activityPreview td#deleteActivitySidebar {
+    margin: 0;
+    padding: 0;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    width: 20px;
+}
+
+.glyphicon.glyphicon-trash.activity {
 	font-size: 15px;
 	color: #e6e6e6;
 }
 
 #lengthCol {
 	text-align: right;
+}
+
+#nameCol p {
+	padding-left: 0px;
+	text-align: left;
 }
 
 #GroupWork {

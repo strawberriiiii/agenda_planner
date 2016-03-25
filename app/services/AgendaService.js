@@ -9,13 +9,8 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
-	o.addDay = function (startH, startM) {
-		var day;
-		if (startH) {
-			day = new Day(startH, startM);
-		} else {
-			day = new Day(8,0);
-		}
+	o.addDay = function (startH, startM, dt) {
+		var day = new Day(startH, startM, dt);
 		// TODO remove this line
 		day._addActivity(new Activity(20, "Final Presentation", "Presentation", "final"));
 		day._addActivity(new Activity(30, "Break", "Break", "break"));

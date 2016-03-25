@@ -5,6 +5,24 @@
 			{{createActivityButton}}
 		</button>
 		
+		<div class="row" ng-show="parkedActivities.length != 0">
+			<div class="col-sm-4 sortByAlphabet">
+				<button type="button" class="close sort" ng-click="sortByAlphabet()">
+					<span class="glyphicon glyphicon-sort-by-alphabet"></span>
+				</button>
+			</div>
+			<div class="col-sm-4 sortByAlphabetReverse">
+				<button type="button" class="close sort" ng-click="sortByAlphabetReverse()">
+					<span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+				</button>
+			</div>
+			<div class="col-sm-4 sortByType">
+				<button type="button" class="close sort" ng-click="sortByType()">
+					<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+				</button>
+			</div>
+		</div>
+		
 		<!-- Adds a container for each activity -->
 		<div class="row dropzone" ng-repeat="p in parkedActivities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, 'sidebar')">
 			
@@ -14,15 +32,15 @@
 				<!--Uses regular HTML table-->
 				<table id="{{p.getTypeId()}}" style="width: 100%">
 					<tr>
-						<td>
+						<td id="nameCol">
 							<p>{{p.getName()}}:</p>
 						</td>
-						<td>
+						<td id="lengthCol">
 							<p>{{p.getStringLength()}}</p>
 						</td>
-						<td>
+						<td class="text-center" id="deleteActivitySidebar">
 							<button type="button" class="close" ng-click="deleteActivity($index)">
-								<span class="glyphicon glyphicon-trash"></span>
+								<span class="glyphicon glyphicon-trash activity"></span>
 							</button>
 						</td>
 					</tr>

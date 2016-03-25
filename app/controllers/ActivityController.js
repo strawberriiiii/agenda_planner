@@ -9,7 +9,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
     };
     $scope.hstep = 1;
  	$scope.mstep = 1;
- 	$scope.parkedActivities = Agenda.parkedActivities;
+ 	$scope.parkedActivities = Agenda.parkedActivities;	
 	$scope.days = Agenda.days;
 
     $scope.reset = function() {
@@ -17,7 +17,18 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    $scope.activity.length = new Date();
 	    $scope.activity.length.setHours(0);
 	    $scope.activity.length.setMinutes(0);
-	    $scope.activity.description = "";
+	    $scope.activity.description = "";    
+    };
+    
+    //reset radioButtons
+    $scope.resetTypes = function() {
+    	if (document.getElementById("radio1") != null && document.getElementById("radio2") != null 
+    		&& document.getElementById("radio3") != null && document.getElementById("radio4") != null) {
+	    	document.getElementById("radio1").checked = false;
+		    document.getElementById("radio2").checked = false;
+		    document.getElementById("radio3").checked = false;
+		    document.getElementById("radio4").checked = false;
+		  }
     };
 
     $scope.reset();
@@ -26,6 +37,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$scope.createActivity = function() {
 	    this.newActivity = angular.copy($scope.activity);
 	    $scope.reset();
+	    $scope.resetTypes();
 	    var minutes = this.newActivity.length.getHours() * 60 + this.newActivity.length.getMinutes();
 		return Agenda.createActivity(minutes, this.newActivity.name, $scope.type, this.newActivity.description);
 	};
@@ -155,5 +167,64 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    $scope.parkedActivities[$scope.editIndex].setDescription($scope.editedActivity.description);
 	    $scope.reset();
 	};
-
+	
+	
+	/**
+	 * Sort of activities according to parameters
+	 */
+	$scope.sortByAlphabet = function() {
+		$scope.parkedActivities.sort(alphabetical);
+	};
+	
+	$scope.sortByAlphabetReverse = function() {
+		$scope.parkedActivities.sort(alphabeticalReverse);
+	};
+	
+	$scope.sortByType = function() {
+		$scope.parkedActivities.sort(sortByType);
+	};
+	
+	function alphabetical(a, b) {
+	    var A = a.getName().toLowerCase();
+	    var B = b.getName().toLowerCase();
+	    if (A < B){
+	    	return -1;
+	    } else if (A > B){
+	    	return  1;
+	    } else{
+	    	return 0;
+	    }
+	};
+	
+	function alphabeticalReverse(a, b) {
+	    var A = a.getName().toLowerCase();
+	    var B = b.getName().toLowerCase();
+	    if (A < B){
+	    	return 1;
+	    } else if (A > B){
+	    	return  -1;
+	    } else{
+	    	return 0;
+	    }
+	};
+	
+	function sortByType(a, b) {
+		for (x in Agenda.labels) {
+			if (Agenda.labels[x] == a.getTypeId()) {
+				A = x;
+			}
+			if (Agenda.labels[x] == b.getTypeId()) {
+				B = x;
+			}
+		}
+		
+		if (A < B){
+	    	return -1;
+	    } else if (A > B){
+	    	return  1;
+	    } else{
+	    	return 0;
+	    }
+	}
+	
 });

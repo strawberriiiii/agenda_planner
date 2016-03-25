@@ -7,6 +7,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.endSlot = "End Time: ",
 	$scope.totalLengthSlot = "Total Length: ";
 	$scope.minute = "min";
+	$scope.date = "Date: ";
 	$scope.deleteDay = "Delete Day";
 	$scope.labels = Agenda.labels;
 	$scope.days = Agenda.days;
@@ -47,12 +48,28 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		};
 	};
 	
-	
+	// Delete activity from day
+	$scope.deleteActivityFromDay = function(dayIndex, activityIndex) {
+		if (confirm("Are you sure you want to delete this activity?")) {
+				Agenda.deleteActivityFromDay(dayIndex, activityIndex);
+	        if ($scope.days[dayIndex]._activities.length == 0) {
+	            Agenda.clearCanvas(dayIndex);
+	        } else {
+	            Agenda.drawGraphic(dayIndex);
+	        }
+	        Agenda.drawGraphic(dayIndex);
+		}        
+	};
+		
 	// Add day
-	$scope.addDay = function(startH, startM) {
-		$scope.updateTimePicker();
-		Agenda.addDay(startH, startM);
+	$scope.addDay = function(startH, startM, date) {
+		$scope.updateTimeDatePicker();
+		Agenda.addDay(startH, startM, date);
 		updateActivities();
+		
+		for (x in $scope.days) {
+			console.log($scope.days[x].getDate());
+		};
 	};
 	
 	// Remove day
@@ -80,34 +97,51 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	};
 	
 	// Timepicker
-	$scope.selectText = "Select the start time!";
+	$scope.selectText = "Select the start time and date!";
 	$scope.mytime = new Date();
   	$scope.hstep = 1;
  	$scope.mstep = 1;
  	
-	$scope.updateTimePicker = function() {
+ 	$scope.updateTimeDatePicker = function() {
 		var d = new Date();
 	    d.setHours( 8 );
 	    d.setMinutes( 0 );
 	    $scope.mytime = d;
+	    
+	    $scope.dt = new Date();
 	};
 	
-	$scope.clear = function() {
-	    $scope.mytime = null;
-	};
-	
-	$scope.deleteActivityFromDay = function(dayIndex, activityIndex) {
-		if (confirm("Are you sure you want to delete this activity?")) {
-				Agenda.deleteActivityFromDay(dayIndex, activityIndex);
-	        if ($scope.days[dayIndex]._activities.length == 0) {
-	            Agenda.clearCanvas(dayIndex);
-	        } else {
-	            Agenda.drawGraphic(dayIndex);
-	        }
-	        Agenda.drawGraphic(dayIndex);
-		}        
-	};
-	
-	$scope.updateTimePicker();
-	
+ 	$scope.updateTimeDatePicker();
+ 	
+ 	// Datepicker
+ 	$scope.dt = new Date();
+ 	
+ 	$scope.inlineOptions = {
+    	minDate: new Date(),
+    	showWeeks: true
+  	};
+  	
+ 	$scope.dateOptions = {
+	    formatYear: 'yy',
+	    maxDate: new Date(2020, 5, 22),
+	    minDate: new Date(),
+	    startingDay: 1
+  	};
+  	
+  	$scope.popup1 = {
+    	opened: false
+  	};
+  	
+  	$scope.popup2 = {
+    	opened: false
+  	};
+
+	$scope.open = function(nr) {
+		if (nr == 1) {
+    		$scope.popup1.opened = true;
+    	} else if (nr == 2) {
+    		$scope.popup2.opened = true;
+    	}
+  	};
+
 });

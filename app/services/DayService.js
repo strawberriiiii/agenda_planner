@@ -3,12 +3,10 @@ angular.module('agendaPlanner.DayService', [])
 	// This is a day constructor. You can use it to create days, 
 	// but there is also a specific function in the Model that adds
 	// days to the model, so you don't need call this yourself.
-	function Day(startH,startM) {
+	function Day(startH,startM, dt) {
 		this._start = startH * 60 + startM;
 		this._activities = [];
-		
-		//TODO delete line and belonging methods if date will not be implemented
-		//this._date = new Date();
+		this._date = dt;
 		
 		this.startTime = this.getStart();
 	}
@@ -117,8 +115,10 @@ angular.module('agendaPlanner.DayService', [])
 		},
 		
 		// updates the date of the day
-		setDate: function(date) {
-			this._date = date;
+		updateDate: function(date) {
+			if (date != null) {
+				this._date = date;
+			}
 		},
 		
 		// return the date of the day
