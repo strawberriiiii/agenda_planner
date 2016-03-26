@@ -84,20 +84,20 @@ input[type=radio]:checked + label#radio4Label {
 
 #radio2Label {
 	color: white;
-	background-image: -moz-linear-gradient(top,#83c983,#5cb85c);
-    background-image: -webkit-gradient(linear,0 0,0 100%,from(#83c983),to(#5cb85c));
-    background-image: -webkit-linear-gradient(top,#83c983,#5cb85c);
-    background-image: -o-linear-gradient(top,#83c983,#5cb85c);
-	background-image: linear-gradient(to bottom,#83c983,#5cb85c);	
+	background-image: -moz-linear-gradient(top,#11a254,#0d7f43);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#11a254),to(#0d7f43));
+    background-image: -webkit-linear-gradient(top,#11a254,#0d7f43);
+    background-image: -o-linear-gradient(top,#11a254,#0d7f43);
+	background-image: linear-gradient(to bottom,#11a254,#0d7f43);	
 }
 
 #radio3Label {
 	color: white;
-	background-image: -moz-linear-gradient(top,#e38582,#d9534f);
-    background-image: -webkit-gradient(linear,0 0,0 100%,from(#e38582),to(#d9534f));
-    background-image: -webkit-linear-gradient(top,#e38582,#d9534f);
-    background-image: -o-linear-gradient(top,#e38582,#d9534f);
-	background-image: linear-gradient(to bottom,#e38582,#d9534f);
+	background-image: -moz-linear-gradient(top,#cc0044,#b3003b);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#cc0044),to(#b3003b));
+    background-image: -webkit-linear-gradient(top,#cc0044,#b3003b);
+    background-image: -o-linear-gradient(top,#cc0044,#b3003b);
+	background-image: linear-gradient(to bottom,#cc0044,#b3003b);
 }
 
 #radio4Label {

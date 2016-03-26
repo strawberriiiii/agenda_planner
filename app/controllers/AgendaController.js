@@ -11,6 +11,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	$scope.deleteDay = "Delete Day";
 	$scope.labels = Agenda.labels;
 	$scope.days = Agenda.days;
+	$scope.popupArray = [];
 	
 	
 	// Create activity array for days
@@ -66,6 +67,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		$scope.updateTimeDatePicker();
 		Agenda.addDay(startH, startM, date);
 		updateActivities();
+		$scope.popupArray.push({opened: false});
 		
 		for (x in $scope.days) {
 			console.log($scope.days[x].getDate());
@@ -75,6 +77,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	// Remove day
 	$scope.removeDay = function(indexDay) {
 		if (confirm("Are you sure you want to delete this day?")) {
+			$scope.popupArray.splice(indexDay, 1);
 			return Agenda.removeDay(indexDay);
 		}
 	};
@@ -128,19 +131,15 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	    startingDay: 1
   	};
   	
-  	$scope.popup1 = {
-    	opened: false
-  	};
-  	
-  	$scope.popup2 = {
+  	$scope.popupDay = {
     	opened: false
   	};
 
 	$scope.open = function(nr) {
-		if (nr == 1) {
-    		$scope.popup1.opened = true;
-    	} else if (nr == 2) {
-    		$scope.popup2.opened = true;
+		if (nr == null) {
+    		$scope.popupDay.opened = true;
+    	} else {
+    		$scope.popupArray[nr].opened = true;
     	}
   	};
 

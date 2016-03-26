@@ -82,7 +82,7 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		var perPartPres = round(partPres / whole, 2) * 100;
 		
 		canvas.beginPath();
-		canvas.fillStyle = "#337ab7";
+		canvas.fillStyle = "#4c91cd";
 		canvas.strokeStyle = "#2e6da4";
 		canvas.rect(10, 0, 50, perPartPres);
 		canvas.fill();
@@ -92,8 +92,8 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		var perPartDis = round(partDis / whole, 2) * 100;
 
 		canvas.beginPath();
-		canvas.fillStyle = "#5cb85c";
-		canvas.strokeStyle = "#4cae4c";
+		canvas.fillStyle = "#0d7f43";
+		canvas.strokeStyle = "#18e779";
 		canvas.rect(10, perPartPres, 50, perPartDis);
 		canvas.fill();
 		
@@ -103,7 +103,7 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		var perPartGroup = round(partGroup / whole, 2) * 100;
 		
 		canvas.beginPath();
-		canvas.fillStyle = "#d9534f";
+		canvas.fillStyle = "#b3003b";
 		canvas.strokeStyle = "#d43f3a";
 		canvas.rect(10, perPartPres + perPartDis, 50, perPartGroup);
 		canvas.fill();
@@ -124,6 +124,7 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 			canvas.strokeStyle = "red";
 			canvas.moveTo(1, 70);
 			canvas.lineTo(70, 70);
+			canvas.lineWidth = 2;
 			canvas.stroke();
 		}
 				

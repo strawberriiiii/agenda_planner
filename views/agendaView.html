@@ -43,9 +43,9 @@
 					</td>
 					<td class="cell2 input" >
 						<p class="input-group">
-						 	<input class="form-control" type="text" uib-datepicker-popup ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="day.updateDate(dt)" />
+						 	<input class="form-control" type="text" uib-datepicker-popup ng-model="day._date" is-open="popupArray[$index].opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"/>
 						    <span class="input-group-btn">
-						    	<button type="button" class="btn btn-default" ng-click="open(1)"><i class="glyphicon glyphicon-calendar"></i></button>
+						    	<button type="button" class="btn btn-default" ng-click="open($index)"><i class="glyphicon glyphicon-calendar"></i></button>
 						    </span>
 						 </p>
 					 	<!--<input class="form-control" type="text" uib-datepicker-popup ng-model="dt" is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-change="day.updateDate(dt)" />-->
@@ -102,9 +102,9 @@
 			</uib-timepicker>
   			
   			<p class="input-group">
-				<input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+				<input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popupDay.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
 				<span class="input-group-btn">
-				  	<button type="button" class="btn btn-default" ng-click="open(2)"><i class="glyphicon glyphicon-calendar"></i></button>
+				  	<button type="button" class="btn btn-default" ng-click="open(null)"><i class="glyphicon glyphicon-calendar"></i></button>
 				</span>
 			</p>
 
