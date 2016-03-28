@@ -144,16 +144,15 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 
 	$scope.findActivity = function(index) {
 	    $scope.editIndex = index;
-	    var activityToBeEdited = $scope.parkedActivities[index];
-	    $scope.editedActivity.name = activityToBeEdited.getName();
-	    var length = activityToBeEdited.getLength();
 	    var date = new Date();
 	    date.setHours(length / 60);
 	    date.setMinutes(length % 60);
-	    $scope.editedActivity.length = date;
-	    $scope.editType = activityToBeEdited.getTypeId();
-	    //document.getElementById(type).checked = true;
-	    $scope.editedActivity.description = activityToBeEdited.getDescription();
+	    var activityToBeEdited = {
+	        'name': $scope.parkedActivities[index].getName(),
+	        'length': date,
+	        'description': $scope.parkedActivities[index].getDescription()
+	    };
+	    angular.copy(activityToBeEdited, $scope.editedActivity);
 	};
 
 	$scope.setEditType = function(type) {
