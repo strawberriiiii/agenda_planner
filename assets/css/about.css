@@ -1,4 +1,4 @@
-img#aboutPic  { 
+img.aboutPic  {
 	-webkit-filter: grayscale(1);
 	-webkit-filter: grayscale(100%);
 	filter: grayscale(100%);
@@ -6,6 +6,10 @@ img#aboutPic  {
 	height: 400px;
 	margin-left: 20px;
 	margin-right: 30px;
+}
+
+img#jessicaPic {
+    margin-top: 25px;
 }
 
 .container.help.about h1 {
