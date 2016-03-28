@@ -27,13 +27,13 @@
 			<fieldset class="form-group">
 				<label for="activityType">Type</label>
 				<div class="btn-group" role="group" id="activityType">
-					<input type="radio" id="radio1" name="radios" value="all" ng-click="setType('Presentation')">
+					<input type="radio" id="radio1" name="radios" value="Presentation" ng-model="activity.type">
 					<label for="radio1" id="radio1Label">Presentation</label>
-					<input type="radio" id="radio2" name="radios"value="false" ng-click="setType('Discussion')">
+					<input type="radio" id="radio2" name="radios"value="Discussion" ng-model="activity.type">
 					<label for="radio2" id="radio2Label">Discussion</label>
-					<input type="radio" id="radio3" name="radios" value="true" ng-click="setType('GroupWork')">
+					<input type="radio" id="radio3" name="radios" value="GroupWork" ng-model="activity.type">
 					<label for="radio3" id="radio3Label">Group Work</label>
-					<input type="radio" id="radio4" name="radios" value="true" ng-click="setType('Break')">
+					<input type="radio" id="radio4" name="radios" value="Break" ng-model="activity.type">
 					<label for="radio4" id="radio4Label">Break</label>
 				</div>
 				

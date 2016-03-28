@@ -60,7 +60,7 @@
 			<div class="row dropzone" ng-repeat="activity in day._activities" ng-drop="true" ng-drop-success="onDropCompleteActivity($index, $data, $event, $parent.$index)">
 					
 				<!-- drag div--> 
-				<div class="activityPreview" ng-click="findActivity($index, $parent.$index)" data-toggle="modal" data-target="#editActivity" ng-drag="true" ng-drag-data="[activity, $parent.$index]">
+				<div class="activityPreview" ng-dblclick="findActivity($index, $parent.$index)" ondblclick="$('#editActivity').modal('show');" data-target="#editActivity" ng-drag="true" ng-drag-data="[activity, $parent.$index]">
 					<table id="{{activity.getTypeId()}}" style="width: 100%">
 						<tr>
 							<td>
@@ -116,7 +116,7 @@
 		</button>
 	</div>
 
-	<div id="editActivity" class="modal fade" role="dialog" ng-controller="ActivityCtrl as ctrl">
+	<div id="editActivity" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog" ng-controller="ActivityCtrl as ctrl">
 		<div class="modal-dialog modal-md" ng-include="'views/editActivityView.html'"></div>
 
 	</div>

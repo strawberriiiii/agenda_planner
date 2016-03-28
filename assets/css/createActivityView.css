@@ -2,6 +2,10 @@
     display: block;
 }
 
+#editActivityType {
+    display: block;
+}
+
 input[type=radio] {
     display:none;
 }
@@ -108,5 +112,3 @@ input[type=radio]:checked + label#radio4Label {
     background-image: -o-linear-gradient(top,#f3bd72,#f0ad4e);
 	background-image: linear-gradient(to bottom,#f3bd72,#f0ad4e;
 }
-
-

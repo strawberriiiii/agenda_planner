@@ -1,10 +1,10 @@
 angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService'])
 .controller('ActivityCtrl', function($scope, $location, Agenda, $rootScope) {
 
-    $scope.type = "";
     $scope.activity = {
         'name': '',
         'length': new Date(),
+        'type': '',
         'description': ''
     };
     $scope.hstep = 1;
@@ -39,7 +39,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    $scope.reset();
 	    $scope.resetTypes();
 	    var minutes = this.newActivity.length.getHours() * 60 + this.newActivity.length.getMinutes();
-		return Agenda.createActivity(minutes, this.newActivity.name, $scope.type, this.newActivity.description);
+		return Agenda.createActivity(minutes, this.newActivity.name, this.newActivity.type, this.newActivity.description);
 	};
 	
 	//Add Activity Button
@@ -47,11 +47,6 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	
 	//Available activity times
 	$scope.availableTimes = [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180];
-
-	//Sets the activity type
-	$scope.setType = function(id) {
-        $scope.type = id;
-	};
 
 	$scope.getModifiedTypeId = function() {
 	    if ($scope.type === 'GroupWork') {
@@ -140,9 +135,9 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	$rootScope.editedActivity = {
 	    'name': '',
 	    'length': new Date(),
+	    'type': '',
 	    'description': ''
 	};
-	$rootScope.editType = '';
 	$rootScope.editIndex = -1;
 	$rootScope.dayIndex = -1;
 	$scope.buttonDict = {
@@ -150,7 +145,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    'Discussion': 'radio2',
 	    'GroupWork': 'radio3',
 	    'Break': 'radio4'
-	}
+	};
 
 	$scope.findActivity = function(index1, index2) {
 	    if (typeof index2 === 'undefined') {
@@ -158,8 +153,7 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
             var date = new Date();
             date.setHours($scope.parkedActivities[index1].getLength() / 60);
             date.setMinutes($scope.parkedActivities[index1].getLength() % 60);
-            $rootScope.editType = $scope.parkedActivities[index1].getTypeId();
-            document.getElementById($scope.buttonDict[$rootScope.editType]).checked = true;
+            $rootScope.editedActivity['type'] = $scope.parkedActivities[index1].getTypeId();
             $rootScope.editedActivity['name'] = $scope.parkedActivities[index1].getName();
             $rootScope.editedActivity['length'] = date;
             $rootScope.editedActivity['description'] = $scope.parkedActivities[index1].getDescription();
@@ -171,30 +165,37 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 	    var activityToBeEdited = $scope.days[index2]._activities[index1];
 	    date.setHours(activityToBeEdited.getLength() / 60);
 	    date.setMinutes(activityToBeEdited.getLength() % 60);
-	    $rootScope.editType = activityToBeEdited.getTypeId();
-	    document.getElementById($scope.buttonDict[$rootScope.editType]).checked = true;
+	    $rootScope.editedActivity['type'] = activityToBeEdited.getTypeId();
 	    $rootScope.editedActivity['name'] = activityToBeEdited.getName();
 	    $rootScope.editedActivity['length'] = date;
 	    $rootScope.editedActivity['description'] = activityToBeEdited.getDescription();
-	};
-
-	$scope.setEditType = function(type) {
-	    $rootScope.editType = type;
 	};
 
 	$scope.editActivity = function() {
 	    if ($rootScope.dayIndex === -1) {
 	        $scope.parkedActivities[$rootScope.editIndex].setName($rootScope.editedActivity.name);
             $scope.parkedActivities[$rootScope.editIndex].setLength($rootScope.editedActivity.length.getHours() * 60 + $rootScope.editedActivity.length.getMinutes());
-            $scope.parkedActivities[$rootScope.editIndex].setTypeId($rootScope.editType);
+            $scope.parkedActivities[$rootScope.editIndex].setTypeId($rootScope.editedActivity.type);
             $scope.parkedActivities[$rootScope.editIndex].setDescription($rootScope.editedActivity.description);
             $scope.reset();
+            $rootScope.editIndex = -1;
+            $scope.resetTypes();
             return;
 	    }
 	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setName($rootScope.editedActivity.name);
 	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setLength($rootScope.editedActivity.length.getHours() * 60 + $rootScope.editedActivity.length.getMinutes());
-	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setTypeId($rootScope.editType);
+	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setTypeId($rootScope.editedActivity.type);
 	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setDescription($rootScope.editedActivity.description);
+	    Agenda.drawGraphic($rootScope.dayIndex);
+	    $rootScope.editIndex = -1;
+	    $rootScope.dayIndex = -1;
+	    $scope.resetTypes();
+	};
+
+	$scope.editReset = function() {
+	    $rootScope.dayIndex = -1;
+	    $rootScope.editIndex = -1;
+	    $scope.resetTypes();
 	};
 	
 	
