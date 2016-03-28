@@ -16,14 +16,17 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<div class="verticalLine"></div>
 			<ul class="nav navbar-nav">
-				<li>
+				<li ng-class="{ active: isActive('/')}">
 					<a ng-href="#/">Home</a>
 				</li>
-				<li>
+				<li ng-class="{ active: isActive('/agenda')}">
 					<a ng-href="#/agenda">Agenda Planner</a>
 				</li>
-				<li>
+				<li ng-class="{ active: isActive('/help')}">
 					<a ng-href="#/help">Help</a>
+				</li>
+				<li ng-class="{ active: isActive('/about')}">
+					<a ng-href="#/about">About</a>
 				</li>
 			</ul>
 		</div>

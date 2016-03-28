@@ -9,6 +9,9 @@ angular.module('agendaPlanner', ['agendaPlanner.MainController', 'agendaPlanner.
 	}).when('/help', {
 		controller : 'MainCtrl',
 		templateUrl : 'views/help.html'	
+	}).when('/about', {
+		controller : 'MainCtrl',
+		templateUrl : 'views/about.html'
 	}).otherwise({
 		redirectTo : '/'
 	}); 
