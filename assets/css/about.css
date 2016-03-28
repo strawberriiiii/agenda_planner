@@ -10,6 +10,7 @@ img.aboutPic  {
 
 img#jessicaPic {
     margin-top: 25px;
+    height: 300px;
 }
 
 .container.help.about h1 {
@@ -28,7 +29,7 @@ img#jessicaPic {
 }
 
 .container.help.about p#secondP {
-	margin-left: 25px;
+	margin-top: 120px;
 }
 
 .container.help.about h4#secondH4 {
