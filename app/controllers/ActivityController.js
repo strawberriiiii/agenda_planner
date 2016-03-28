@@ -1,5 +1,5 @@
 angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService'])
-.controller('ActivityCtrl', function($scope, $location, Agenda) {
+.controller('ActivityCtrl', function($scope, $location, Agenda, $rootScope) {
 
     $scope.type = "";
     $scope.activity = {
@@ -136,35 +136,65 @@ angular.module('agendaPlanner.ActivityController', ['agendaPlanner.AgendaService
 		}	    
 	};
 
-	$scope.editedActivity = {
+    //Uses $rootScope to ensure that changes are not later overwritten by default values
+	$rootScope.editedActivity = {
 	    'name': '',
 	    'length': new Date(),
 	    'description': ''
 	};
+	$rootScope.editType = '';
+	$rootScope.editIndex = -1;
+	$rootScope.dayIndex = -1;
+	$scope.buttonDict = {
+	    'Presentation': 'radio1',
+	    'Discussion': 'radio2',
+	    'GroupWork': 'radio3',
+	    'Break': 'radio4'
+	}
 
-	$scope.findActivity = function(index) {
-	    $scope.editIndex = index;
+	$scope.findActivity = function(index1, index2) {
+	    if (typeof index2 === 'undefined') {
+	        $rootScope.editIndex = index1;
+            var date = new Date();
+            date.setHours($scope.parkedActivities[index1].getLength() / 60);
+            date.setMinutes($scope.parkedActivities[index1].getLength() % 60);
+            $rootScope.editType = $scope.parkedActivities[index1].getTypeId();
+            document.getElementById($scope.buttonDict[$rootScope.editType]).checked = true;
+            $rootScope.editedActivity['name'] = $scope.parkedActivities[index1].getName();
+            $rootScope.editedActivity['length'] = date;
+            $rootScope.editedActivity['description'] = $scope.parkedActivities[index1].getDescription();
+            return;
+	    }
+	    $rootScope.editIndex = index1;
+	    $rootScope.dayIndex = index2;
 	    var date = new Date();
-	    date.setHours(length / 60);
-	    date.setMinutes(length % 60);
-	    var activityToBeEdited = {
-	        'name': $scope.parkedActivities[index].getName(),
-	        'length': date,
-	        'description': $scope.parkedActivities[index].getDescription()
-	    };
-	    angular.copy(activityToBeEdited, $scope.editedActivity);
+	    var activityToBeEdited = $scope.days[index2]._activities[index1];
+	    date.setHours(activityToBeEdited.getLength() / 60);
+	    date.setMinutes(activityToBeEdited.getLength() % 60);
+	    $rootScope.editType = activityToBeEdited.getTypeId();
+	    document.getElementById($scope.buttonDict[$rootScope.editType]).checked = true;
+	    $rootScope.editedActivity['name'] = activityToBeEdited.getName();
+	    $rootScope.editedActivity['length'] = date;
+	    $rootScope.editedActivity['description'] = activityToBeEdited.getDescription();
 	};
 
 	$scope.setEditType = function(type) {
-	    $scope.editType = type;
+	    $rootScope.editType = type;
 	};
 
 	$scope.editActivity = function() {
-	    $scope.parkedActivities[$scope.editIndex].setName($scope.editedActivity.name);
-	    $scope.parkedActivities[$scope.editIndex].setLength($scope.editedActivity.length.getHours() * 60 + $scope.editedActivity.length.getMinutes());
-	    $scope.parkedActivities[$scope.editIndex].setTypeId($scope.editType);
-	    $scope.parkedActivities[$scope.editIndex].setDescription($scope.editedActivity.description);
-	    $scope.reset();
+	    if ($rootScope.dayIndex === -1) {
+	        $scope.parkedActivities[$rootScope.editIndex].setName($rootScope.editedActivity.name);
+            $scope.parkedActivities[$rootScope.editIndex].setLength($rootScope.editedActivity.length.getHours() * 60 + $rootScope.editedActivity.length.getMinutes());
+            $scope.parkedActivities[$rootScope.editIndex].setTypeId($rootScope.editType);
+            $scope.parkedActivities[$rootScope.editIndex].setDescription($rootScope.editedActivity.description);
+            $scope.reset();
+            return;
+	    }
+	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setName($rootScope.editedActivity.name);
+	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setLength($rootScope.editedActivity.length.getHours() * 60 + $rootScope.editedActivity.length.getMinutes());
+	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setTypeId($rootScope.editType);
+	    $scope.days[$rootScope.dayIndex]._activities[$rootScope.editIndex].setDescription($rootScope.editedActivity.description);
 	};
 	
 	

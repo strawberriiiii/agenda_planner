@@ -27,14 +27,14 @@
 			<fieldset class="form-group">
 				<label for="activityType">Type</label>
 				<div class="btn-group" role="group" id="activityType">
-					<input type="radio" id="Presentation" name="radios" value="all" ng-click="setEditType('Presentation')">
-					<label for="Presentation" style="color: #337ab7;">Presentation</label>
-					<input type="radio" id="Discussion" name="radios"value="false" ng-click="setEditType('Discussion')">
-					<label for="Discussion" style="color: #5cb85c;">Discussion</label>
-					<input type="radio" id="GroupWork" name="radios" value="true" ng-click="setEditType('GroupWork')">
-					<label for="GroupWork" style="color: #d9534f;">Group Work</label>
-					<input type="radio" id="Break" name="radios" value="true" ng-click="setEditType('Break')">
-					<label for="Break" style="color: #f0ad4e;">Break</label>
+					<input type="radio" id="radio1" name="radios" value="all" ng-click="setEditType('Presentation')">
+					<label for="radio1" id="radio1Label">Presentation</label>
+					<input type="radio" id="radio2" name="radios"value="false" ng-click="setEditType('Discussion')">
+					<label for="radio2" id="radio2Label">Discussion</label>
+					<input type="radio" id="radio3" name="radios" value="true" ng-click="setEditType('GroupWork')">
+					<label for="radio3" id="radio3Label">Group Work</label>
+					<input type="radio" id="radio4" name="radios" value="true" ng-click="setEditType('Break')">
+					<label for="radio4" id="radio4Label">Break</label>
 				</div>
 
 			</fieldset>
@@ -50,6 +50,6 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="reset()">Cancel</button>
-		<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="$('#createActivity').modal('hide')" ng-click="editActivity()">Submit</button>
+		<button type="button" class="btn btn-success" data-dismiss="modal" onclick="$('#createActivity').modal('hide')" ng-click="editActivity()">Save</button>
 	</div>
 </div>
