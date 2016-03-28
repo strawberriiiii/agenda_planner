@@ -26,7 +26,7 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		return activities + "}";
 	}
 	
-	// Create parked activity array
+	//Create parked activity array
 	function parkedActivities() {
 		return Agenda.parkedActivitiesString();
 	} 
@@ -49,7 +49,9 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		};
 	};
 	
-	// Delete activity from day
+	/**
+	 * Delete activity from day
+	 */
 	$scope.deleteActivityFromDay = function(dayIndex, activityIndex) {
 		if (confirm("Are you sure you want to delete this activity?")) {
 				Agenda.deleteActivityFromDay(dayIndex, activityIndex);
@@ -62,7 +64,9 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		}        
 	};
 		
-	// Add day
+	/**
+	 * Add day
+	 */ 
 	$scope.addDay = function(startH, startM, date) {
 		$scope.updateTimeDatePicker();
 		Agenda.addDay(startH, startM, date);
@@ -74,7 +78,9 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		};
 	};
 	
-	// Remove day
+	/**
+	 * Remove day
+	 */
 	$scope.removeDay = function(indexDay) {
 		if (confirm("Are you sure you want to delete this day?")) {
 			$scope.popupArray.splice(indexDay, 1);
@@ -82,7 +88,9 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		}
 	};
 	
-	// Drag&Drop of the days
+	/**
+	 * Drag&Drop of the days
+	 */
 	$scope.onDropCompleteDay = function(index, obj, evt) {
 		if ('_start' in obj) {
 		   	var otherObj = $scope.days[index];
@@ -94,12 +102,16 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 		}
 	};
 	
-	// Draw chart for the percentages of the activities per day
+	/**
+	 * Draw chart for the percentages of the activities per day
+	 */ 
 	$scope.drawGraphic = function(indexDay) {
 		Agenda.drawGraphic(indexDay);				
 	};
 	
-	// Timepicker
+	/**
+	 * Timepicker
+	 */
 	$scope.selectText = "Select the start time and date!";
 	$scope.mytime = new Date();
   	$scope.hstep = 1;
@@ -116,7 +128,9 @@ angular.module('agendaPlanner.AgendaController', ['agendaPlanner.AgendaService']
 	
  	$scope.updateTimeDatePicker();
  	
- 	// Datepicker
+ 	/**
+ 	 * Datepicker
+ 	 */
  	$scope.dt = new Date();
  	
  	$scope.inlineOptions = {

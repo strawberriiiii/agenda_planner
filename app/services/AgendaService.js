@@ -7,26 +7,21 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		labels: ["Presentation", "Discussion", "GroupWork", "Break"]
 	};
 	
-	// adds a new day. if startH and startM (start hours and minutes)
-	// are not provided it will set the default start of the day to 08:00
+	/**
+	 * Add a new day. 
+	 * If startH and startM (start hours and minutes) are not provided,
+	 * it will set the default start of the day to 08:00
+	 */
 	o.addDay = function (startH, startM, dt) {
 		var day = new Day(startH, startM, dt);
-		// TODO remove this line
-		day._addActivity(new Activity(20, "Final Presentation", "Presentation", "final"));
-		day._addActivity(new Activity(30, "Break", "Break", "break"));
 		o.days.push(day);
 		return day;
 	};
 	
-	// remove a specific day to avoid an overload of days in the agenda
-	o.removeDay = function(index) {
-		// move the activities from the day to the parked activities
-		/*if (o.days[index]._activities.length != 0) {
-			for (x in o.days[index]._activities) {
-				o.parkedActivities.push(o.days[index]._activities[x]);
-			} 
-		}*/
-		
+	/**
+	 * Remove a specific day to avoid an overload of days in the agenda
+	 */
+	o.removeDay = function(index) {		
 		o.days.splice(index, 1);
 	};
 	
@@ -65,7 +60,9 @@ angular.module('agendaPlanner.AgendaService', ['agendaPlanner.DayService', 'agen
 		return act;
 	};
 	
-	// draw chart for the percentages of the activities per day
+	/**
+	 * Draw chart for the percentages of the activities per day
+	 */
 	o.drawGraphic = function(indexDay) {
 		var whole = o.days[indexDay].getTotalLength();
 		var allCanvases = document.getElementsByTagName('canvas');
